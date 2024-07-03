@@ -23,13 +23,14 @@ alias gco="git checkout"
 alias gst="git status -uno"
 alias gstn="git status -unormal"
 alias gsta="git status -uall"
-alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
-alias glgo='git log --pretty=oneline --graph'
-alias glgs='git log --pretty=short --graph'
+alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat -n 5'
+alias glgo='git log --pretty=oneline --graph -n 5'
+alias glgs='git log --pretty=short --graph -n 5'
 alias gdf='git diff'
-alias gbch='git branch'
+alias gb='git branch -av'
 alias gad='git add'
 alias gcmt='git commit'
+alias gcmt!='git commit --amend'
 alias gcmtm='git commit -m'
 alias gmg='git merge'
 alias grb='git rebase'
