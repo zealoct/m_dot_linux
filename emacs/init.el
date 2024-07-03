@@ -49,7 +49,7 @@
 
 ;; load customized theme
 (if window-system
-    (load-theme 'light-blue t)
+    (load-theme 'tsdh-light t)
   (load-theme 'zea t))
 
 (custom-set-faces
@@ -69,7 +69,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(custom-enabled-themes '(zea))
  '(custom-safe-themes
-   '("1e541b85f32e32f1f5d5c3afaf1ba3d5f3262d140a09d8c1a9099493eef56a8d" default))
+   '("0c7772b3c47ed86abc7399d0c8a0305eefdeefd262b1c2845fa24aeea7169830" "4b218487556ebe77be6474924611409ce653c52928ddd9f2f26c465a5ce932af" "353c362f41128aeb3fa343dd71f7ae1d3ee8f6978070ab6d3f6ab20b958b5e54" "2791abe3592ba49e43a38869469695f41a32b0c0bc9362889668695133446757" "1e541b85f32e32f1f5d5c3afaf1ba3d5f3262d140a09d8c1a9099493eef56a8d" default))
  '(package-selected-packages
    '(zygospore yasnippet yafolding ws-butler volatile-highlights use-package swiper-helm markdown-mode+ ivy-posframe iedit helm-swoop helm-projectile helm-ls-git helm-gtags helm-ag dtrt-indent counsel-projectile counsel-gtags company-c-headers clean-aindent-mode auto-complete anzu)))
