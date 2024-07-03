@@ -27,8 +27,8 @@ alias gstn="git status -unormal"
 alias gsta="git status -uall"
 alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat'
 alias glg5='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat -n 5'
-alias glgo='git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative'
-alias glgo5='git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative -n 5'
+alias glgo='git log --pretty=format:"%C(red)%h%Creset [%Cblue%an%Creset]%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative'
+alias glgo5='git log --pretty=format:"%C(red)%h%Creset [%Cblue%an%Creset]%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative -n 5'
 alias glgs='git log --pretty=short --graph'
 alias glgs5='git log --pretty=short --graph -n 5'
 alias glgm='git log --pretty=medium --graph'
@@ -64,6 +64,9 @@ PATH=$HOME/usr/bin/gcc:$PATH
 PATH=$HOME/usr/bin/ccover/bin:$PATH
 PATH=$HOME/.BCloud/bin:$PATH
 PATH=$HOME/scmtool/usr/bin:$PATH
+PATH=$HOME/.cargo/bin:$PATH
 export PATH
 
 export LD_LIBRARY_PATH=$HOME/usr/lib:$HOME/.jumbo/lib:$LD_LIBRARY_PATH
+
+unset LS_COLORS

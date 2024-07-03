@@ -22,3 +22,4 @@
         added = green
         changed = red
         untracked = cyan
+[http]

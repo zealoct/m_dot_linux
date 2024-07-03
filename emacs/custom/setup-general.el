@@ -19,10 +19,10 @@
 (setq-default tab-width 4)
 
 ;; Compilation
-(global-set-key (kbd "<f5>") (lambda ()
-                               (interactive)
-                               (setq-local compilation-read-command nil)
-                               (call-interactively 'compile)))
+;;(global-set-key (kbd "<f5>") (lambda ()
+;;                               (interactive)
+;;                               (setq-local compilation-read-command nil)
+;;                               (call-interactively 'compile)))
 
 ;; setup autosave directory
 (setq temporary-file-directory "~/.emacs_saves")
@@ -39,6 +39,7 @@
 (global-set-key (kbd "<C-down>") 'enlarge-window)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "<M-.>") 'previous-buffer)
 
 ;; setup GDB
 (setq

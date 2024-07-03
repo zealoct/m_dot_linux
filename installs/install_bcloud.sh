@@ -118,6 +118,7 @@ if [ "$OS_VER" == "$centos_6u3_version" ]; then
     python_file=$python_file6u3
 fi 
 
+python_file=$python_file6u3
 python_url="$url/$python_file"
 
 if [ "$need_update_py" == 'YES' ]; then
