@@ -1,12 +1,21 @@
 ;; company-c-headers
-(use-package company-c-headers
-  :init
-  (add-to-list 'company-backends 'company-c-headers))
+(use-package company-c-headers)
+
+(setq company-backends
+      '((company-gtags
+         company-semantic
+         company-capf)
+        (company-c-headers
+         company-files          ; files & directory
+         company-keywords       ; keywords
+         company-yasnippet)))
+
+;;(company-mode)
 
 (use-package cc-mode
   :init
-  (define-key c-mode-map  [(tab)] 'company-complete)
-  (define-key c++-mode-map  [(tab)] 'company-complete)
+  ;;(define-key c-mode-map  [(tab)] 'company-complete)
+  ;;(define-key c++-mode-map  [(tab)] 'company-complete)
 
   ;; hs-minor-mode for folding source code
   (add-hook 'c-mode-common-hook 'hs-minor-mode)
@@ -36,7 +45,9 @@
               (whitespace-mode t)
               )
             )
+
   )
+
 
 ;; Available C style:
 ;; “gnu”: The default style for GNU projects

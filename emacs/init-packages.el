@@ -19,6 +19,8 @@
         clean-aindent-mode
         company
         company-c-headers
+        company-clang
+        counsel-gtags
         counsel-projectile
         dtrt-indent
         ;;ecb
@@ -26,11 +28,15 @@
         helm-ls-git
         helm-gtags
         helm-projectile
+        helm-swoop
         iedit
+        ivy
+        ivy-posframe
         markdown-mode
         markdown-mode+
         ;;rainbow-delimiters
         ;;smart-tabs-mode
+        swiper-helm
         undo-tree
         use-package
         volatile-highlights

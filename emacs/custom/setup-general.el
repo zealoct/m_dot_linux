@@ -55,7 +55,13 @@
   (global-company-mode 1)
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0)
-  (delete 'company-semantic company-backends))
+  (setq company-backends
+        '((company-files          ; files & directory
+           company-keywords       ; keywords
+           company-yasnippet)
+          (company-capf company-abbrev company-dabbrev)
+          )))
+
 ;; (define-key c-mode-map  [(control tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(control tab)] 'company-complete)
 
