@@ -5,6 +5,7 @@ dir=$(cd $(dirname $BASH_SOURCE[0]) && pwd)
 # Copy conf files
 cp $dir/bash/bash_profile $HOME/.bash_profile
 cp $dir/bash/bashrc $HOME/.bashrc
+cp $dir/bash/bash_common $HOME/.bash_common
 cp $dir/zsh/zshrc $HOME/.zshrc
 cp $dir/tmux/tmux.conf $HOME/.tmux.conf
 

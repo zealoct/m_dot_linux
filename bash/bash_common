@@ -1,0 +1,46 @@
+# terminal language and encoding
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# general alias
+alias l='ls --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias vi="vim"
+alias svi='sudo vi'
+alias scat='sudo cat'
+alias sfind='sudo find'
+alias grep='grep --color=auto'
+alias du="du -mh --max-depth=1"
+alias egrep='egrep --color=auto'
+alias rm='rm -i'
+alias man='LANG=C man'
+alias sbcl="rlwrap -b \$BREAK_CHARS sbcl"
+# git
+alias gst="git status -uno"
+alias gstn="git status -unormal"
+alias gsta="git status -uall"
+alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
+alias glgo='git log --pretty=oneline --graph'
+alias glgs='git log --pretty=short --graph'
+alias gdf='git diff'
+alias gbch='git branch'
+alias gad='git add'
+alias gcmt='git commit'
+alias gcmtm='git commit -m'
+alias gmg='git merge'
+alias grb='git rebase'
+# tmux
+alias tmux="tmux -2" # make tmux support 256-color
+alias ta='tmux attach -d -t'
+alias tls='tmux ls'
+
+# PATH setup
+PATH=$HOME/.jumbo/bin:$PATH
+PATH=$HOME/usr/bin:$PATH
+PATH=$HOME/usr/bin/ccover/bin:$PATH
+export PATH
+
+export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH

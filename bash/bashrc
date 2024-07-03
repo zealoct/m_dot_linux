@@ -8,40 +8,4 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-
-alias l='ls --color=auto'
-alias ls='ls --color=auto'
-alias ll='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias vi="vim"
-alias svi='sudo vi'
-alias scat='sudo cat'
-alias sfind='sudo find'
-alias grep='grep --color=auto'
-alias du="du -mh --max-depth=1"
-alias egrep='egrep --color=auto'
-alias rm='rm -i'
-alias man='LANG=C man'
-alias sbcl="rlwrap -b \$BREAK_CHARS sbcl"
-# git
-alias gstt="git status -uno"
-alias gsttn="git status -unormal"
-alias gstta="git status -uall"
-alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
-alias glogo='git log --pretty=oneline'
-alias glogs='git log --pretty=short'
-alias gdiff='git diff'
-# tmux
-alias tmux="tmux -2" # make tmux support 256-color
-alias ta='tmux attach -d -t'
-alias tls='tmux ls'
-# PATH setup
-PATH=$HOME/.jumbo/bin:$PATH
-PATH=$HOME/usr/bin:$PATH
-PATH=$HOME/usr/bin/ccover/bin:$PATH
-export PATH
-
-export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+[[ -f "$HOME/.bash_common" ]] && source "$HOME/.bash_common"
