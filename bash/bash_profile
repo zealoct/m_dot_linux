@@ -12,3 +12,6 @@ export PATH
 
 LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH
+
+PATH=$HOME/.BCloud/bin:$PATH
+export PATH

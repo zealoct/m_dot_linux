@@ -19,6 +19,7 @@ alias rm='rm -i'
 alias man='LANG=C man'
 alias sbcl="rlwrap -b \$BREAK_CHARS sbcl"
 # git
+alias gco="git checkout"
 alias gst="git status -uno"
 alias gstn="git status -unormal"
 alias gsta="git status -uall"
