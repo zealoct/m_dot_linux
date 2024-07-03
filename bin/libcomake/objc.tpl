@@ -1,0 +1,8 @@
+__$NAME_OBJ$__ : CC := __$CC_VALUE$__
+__$NAME_OBJ$__ : CFLAGS := __$CXXFLAGS_VALUE$__
+__$NAME_OBJ$__ : CPPFLAGS := __$CPPFLAGS_VALUE$__
+__$NAME_OBJ$__ : CFLAGS := __$CFLAGS_VALUE$__
+__$NAME_OBJ$__ : INCPATH := __$INCPATH_VALUE$__ $(DEP_INCPATH)
+
+__$NAME_OBJ$__ : __$NAME$__
+	$(CC) -c -o $@ $< $(CFLAGS) $(INCPATH) $(CPPFLAGS)

@@ -1,0 +1,376 @@
+* comake2使用说明
+#+OPTIONS: H:5
+
+如果存在问题的话,请发送邮件到[[mailto:zhangyan04@baidu.com][zhangyan04@baidu.com]]
+
+代码下载:[[https://svn.baidu.com/com/branches/tools/comake/com_1-0-85-1_BRANCH/][https://svn.baidu.com/com/branches/tools/comake/com_1-0-85-1_BRANCH/]]
+
+** comake2概述
+comake2允许用户通过编写COMAKE文件,来帮助用户管理编译依赖以及编译环境的开发工具
+   1. comake2能够帮助用户生成较可读可调试的Makefile
+   2. comake2能够自动帮助用户搭建编译环境
+   3. comake2能够允许用户实施持续集成开发
+comake2是Python编写的,所需要的COMAKE文件也是实际上也是一个Python脚本.
+所以懂一些Python会更好,不过comake2在设计的时候尽量让用户感觉不到是在写脚本而更像是在写配置.
+
+** 如何快速使用comake2
+使用comake2 -h/--help就可以查看帮助了.
+#+BEGIN_EXAMPLE
+comake[com make]能够自动帮助用户搭建环境,并且生成Makefile工具.
+程序会读取目录下面的COMAKE文件,产生Makefile和环境.用户需要提供这个COMAKE文件.
+版本:%d
+参数:
+        -h --help 查看帮助
+        -D --debug 开启debug选项[默认不打开].-D -D可以查看更多调试信息.
+        -S --scratch 创建一个默认的COMAKE文件
+        -E --export-configs 导出模块的4位版本依赖,存放在COMAKE.CONFIGS下面.比如-E public/ub@1.0.0.0
+        -W --watch-configs 查看本地依赖模块.-W -W可以查看模块引入来源.-W -W -W可以查看依赖模块的依赖.
+        -I --import-files 在解释COMAKE文件之前导入模块
+        -C --change directory 切换到directory下面执行[默认当前目录]
+        -Q --quiet 安静模式[默认不打开]
+        -U --update-configs 更新环境
+        -B --build-configs 构建环境
+        -F --force 更新/构建环境时强制进行[默认不打开]
+        -J --make-thread-number 如果模块使用COMAKE生成的Makefile的话,编译线程数
+        -K --keep-going 构建/更新环境中途出错的话,忽略错误继续[默认不打开]
+        --no-recursive 不递归生成每个目录下面的Makefile[默认情况下是递归生成]
+        --time-compile-link 计时编译和链接时间[默认不打开]
+#+END_EXAMPLE
+   1. 使用comake2 -S就可以在当前目录下面产生一个空COMAKE文件了,这样能够节省用户从头开发编写的时间.
+   2. 然后用户只需要修改COMAKE文件,然后再次使用comake2,接着就会产生Makefile文件.然后就可以直接make了.
+
+** 使用comake2例子
+假设我们/home/rd/cvs是我们的代码树顶层目录,我们的项目是com/mock[所以在目录/home/rd/cvs/com/mock下面].我们所有的源文件有mock.cpp,mock.h,run\_mock.cpp这3个文件,我们希望产生
+   * libmock.a这个静态链接库
+   * run\_mock可执行程序,依赖libmock.a这个库
+我们依赖了public/ub这个环境.我们使用comake2 -S产生COMAKE文件并且调整如下.
+
+*** COMAKE文件
+#+BEGIN_SRC Python
+#edit-mode: -*- python -*-
+#coding:gbk
+
+#工作路径.
+WORKROOT('../../')
+
+#C预处理器参数.
+CPPFLAGS('-D_GNU_SOURCE -D__STDC_LIMIT_MACROS -DVERSION=\\\"1.9.8.7\\\"')
+
+#C编译参数.
+CFLAGS('-g -pipe -W -Wall')
+
+#C++编译参数.
+CXXFLAGS('-g -pipe -W -Wall')
+
+#IDL编译参数
+IDLFLAGS('--compack')
+
+#头文件路径.
+INCPATHS('. ./include ./output ./output/include')
+
+#链接参数.
+LDFLAGS('-lpthread -lcrypto')
+
+#依赖模块
+CONFIGS('public/ub')
+
+Application('run_mock',Sources('run_mock.cpp','mock.cpp'))
+StaticLibrary('mock',Sources('mock.cpp'),HeaderFiles('mock.h'))
+#+END_SRC
+
+*** COMAKE文件剖析
+   * #edit-mode以及#coding这两行,仅仅是告诉你的编辑器[vi/emacs]这个文件是python格式的.事实上COMAKE就是Python格式文件,comake2也是使用python编写的.
+   * WORKROOT('../../'),告诉当前的根目录在../../
+   * CPPFLAGS,CFLAGS,CXXFLAGS,IDLFLAGS,分别表示C预处理器,C编译器,C++编译器,以及IDL编译器的编译参数.
+   * INCPATHS,表示自己内部目录的头文件路径
+   * LDFLAGS,表示对于应用程序应该链接什么外部库
+   * CONFIGS,表示使用什么模块.我们这里使用public/ub.如果使用comake2 -S产生的话,默认是使用基线.
+   * Application,说明编译应用程序run\_mock,依赖了后面几个sources
+   * StaticLibrary,说明我们想编译一个静态链接库,依赖后面几个source,并且发布文件mock.h
+
+*** comake2执行过程
+编写好了COMAKE文件之后,那么可以使用comake2了.
+   * 如果你还没有public/ub的话,可以comake2 --update-configs或者执行comake2 -U.
+   * 如果你有了public/ub的话,需要重新编译,可以comake2 --build-configs或者执行comake2 -B.
+   * 如果你已经有环境的话,那么直接执行comake2就会产生Makefile文件.
+   * 完成之后你就可以直接执行make了.默认情况下面有这些目标
+      * all 构建所有Target.构建Target就会默认地copy到output目录西脉案.
+      * clean 删除所有产生Target以及中间文件.
+      * dist 把所有文件打包走,成为.tar.gz文件.产生的文件在上一层目录.
+      * love 什么东西最能够让你high呢?of course.make love:)
+      * test make -C test进行测试目录.
+   * 注意对于Directory的目标l会进入下一级生成Makefile.如果不想这么做的话,那么可以使用--no-recursive选项.
+
+** comake2高级部分
+*** comake2运行时环境
+   * comake2是Python编写的,COMAKE文件本质上也是Python脚本,不过comake2提供了COMAKE文件的运行时
+   * comake2在外围定义了一个Environment类,并且产生了一个ENV实例.
+   * comake2同时定义了很多标签,比如WORKROOT,CPPFLAGS,CFLAGS,Application.操作这些标签时候会被记录进入ENV这个实例.
+   * comake2在运行的时候,首先from Environment import *,然后execfile('COMAKE')这个脚本.执行完成脚本之后,在ENV就获得了所有的COMAKE提供的信息
+   * 执行完COMAKE之后,comake2内部就可以通过这些信息来完成编译环境搭建和Makefile生成.
+
+*** 编译环境搭建
+   * 如果用户执行--build-configs这个选项的话就会帮助用户搭建环境.
+   * 首先根据COMAKE里面所有提供到的依赖模块信息,得到所有指定的依赖模块.
+   * 然后向SCM查询这些模块的二级依赖,然后得到所有依赖模块以及版本.
+   * 如果用户执行--update-configs这个参数,那么我们就会去尝试编译环境.
+   * 如果没有目录存在的话,我们就直接checkout出来.如果目录存在的话,那么我们会svn sw来尝试merge.或者用户也可以放弃进行merge.
+   * 然后开始编译.我们会对每个模块编译首先make clean然后再make.
+   * 编译环境的如果模块使用COMAKE编写会make -j 4来编译模块.参数-J的话可以指定线程数.否则使用make -j来编译.
+
+*** COMAKE文件元素
+**** 编译标签
+| 元素名称           | 作用                       | example                                       | 注意事项                              |
+|--------------------+----------------------------+-----------------------------------------------+---------------------------------------|
+| WORKROOT           | 当前工作路径               | WORKROOT('../../')                            | 最好使用相对路径                      |
+| MakeThreadNumber   | 使用多少个线程进行make     | MakeThreadNumber(4)                           | 相当于执行使用make -j[废弃]           |
+| CopyUsingHardLink  | copy使用硬链接             | CopyUsingHardLink(True)                       |                                       |
+| CPPFLAGS           | C预处理参数                | CPPFLAGS('-DGNU\_SOURCE')                     |                                       |
+| CFLAGS             | C编译参数                  | CFLAGS('-g -Wall','-O2')                      |                                       |
+| CXXFLAGS           | C++编译参数                | CXXFLAGS('-g -Wall','-O2')                    |                                       |
+| INCPATHS           | 搜索头文件路径             | INCPATHS('. ./include')                       | 这里不要加上-I前缀.                   |
+| LIBS               | 链接使用的库文件           | LIBS('./libmock.a')                           |                                       |
+| LDFLAGS            | 链接参数                   | LDFLAGS('-lpthread -lcrypto')                 |                                       |
+| IDLFLAGS           | IDL编译参数                | IDLFLAGS('--compack --ns=mock')               | 实际上是mcy的编译参数                 |
+| UBRPCFLAGS         | UBRPCGEN编译参数           | UBRPCFLAGS('--compack')                       |                                       |
+| ImportConfigsFrom  | 从其他目录的COMAKE继承模块 | ImportConfigsFrom('..')                       |                                       |
+| ReplaceExtNameWith | 替换文件后缀名             | ReplaceExtNameWith('x.cpp y.cpp','.cpp','.o') |                                       |
+| GetEnv             | 获得环境变量               | GetEnv('USER')                                | 如果没有特定key的话,返回'undefined'   |
+| BuildVersion       | 获取编译版本               | BuildVersion()                                | 等效于GetEnv('COMAKE2_BUILD_VERSION') |
+     
+   * INCPATHS允许使用$开头,代表路径相对于WORKROOT.注意不要写成$/而应该是$.比如INCPATHS('$public/ub')
+
+**** 编译实体
+***** CONFIGS
+   * 表示依赖什么模块.
+   * 比如CONFIGS('public/ub')
+   * 如果需要制定版本号的话,可以这样完成CONFIGS('public/ub@1.0.0.0')或者是CONFIGS('public/ub@ub\_1-0-0-0\_PD\_BL')
+   * 默认情况下我们会猜测头文件搜索路径是(. ./include ./output ./output/include),如果找不到的话,可以通过IncludePaths来指定
+   * 比如CONFIGS('ps/spider/bddb',IncludePaths('./client/include'))
+
+***** Application/StaticLibrary/SharedLibrary
+   * 表示产生应用程序/静态库/共享库.
+   * 比如Application('mock',Depends(Sources('mock.cpp')))
+可以使用的编译参数包括
+   * Sources.表示所依赖的源文件.Sources相对于下面的编译参数都比较特殊,里面还可以有编译参数,所以放在编译实体这节介绍.
+   * Depends.表示依赖什么模块下面的库文件,比如Depends('public/ub:./output/lib/libub.a')
+   * Prefixes.表示在这个目标执行之前,依赖什么目标.
+   * Depends.same as Prefixes.
+   * OutputPath.发布路径.如果填写空的话,表示不发布.应用程序发布到output/bin,静态库发布到output/lib,动态库发布到output/so.
+   * Libraries.编译应用程序希望使用的库文件.
+   * LinkFlags.编译应用程序希望使用的链接参数.
+   * HeaderFiles.静态库依赖的头文件.
+   * HeaderOutputPath.静态库头文件发布路径.默认发布到output/include下面.
+
+***** Directory
+   * 表示执行一个目录.
+   * 比如Directory('hello')的话,那么产生动作就是make -C hello.
+
+***** TARGET
+   * 表示一个模糊目标,需要用户自己提供动作,可以使用编译参数ShellCommands来指定.
+   * 理论上任何Makefile完成的目标都可以通过TARGET来指定.
+可以使用的编译参数包括
+   * PhonyMode.这个目标是否应该每次执行.不对应任何文件.
+   * CleanFiles.如果执行clean时候应该删除的文件.
+   * ShellCommands.对应的shell命令.
+   * CleanCommands.在make clean时候的命令.
+
+***** Sources
+   * 用来描述源文件.
+   * 比如Sources('a.cpp b.cpp')等.
+   * 可以使用GLOB函数来匹配批量文件.比如GLOB('*.cpp *.h').
+可以使用的编译参数包括
+   * IncludePaths.编译这个源文件还需要使用头文件搜索路径.
+   * FileMode.文件模式.默认情况下面我们会处理.cpp.c等文件,如果不希望被处理的话,那么可以使用FileMode(True)通知.
+   * CppFlags/CFlags/CxxFlags/IdlFlags/UbRpcFlags.各种编译参数.如果没有制定的话,那么会使用全局指定的.
+   * UseMcy/UseUbrpcgen.是否使用mcy和ubrpcgen来产生代码.
+   * Prefixes.源文件所依赖的目标.
+   * Depends.same as Prefixes.
+
+** comake2其他问题
+*** 2010Q4产品创新奖申请语
+@20102120
+
+comake2主要解决了基于主干开发的一系列问题,主要包括如何管理代码主干的编译依赖以及如何自动更新本地依赖模块.
+现在comake2在Nova下面近30个模块都已经使用comake2来管理,效果良好.后期会使用comake2管理nova所有模块.
+
+*** 如何配合使用ccache
+   * 首先必须确保安装好ccache.可以使用ccache -s查看ccache的统计状态.
+   * 然后在COMAKE文件里面写好CC('ccache gcc')以及CXX('ccache g++').
+   * 最好开启ccache忽略源代码中的__DATE__和__TIME__选项.可以使用export CCACHE_SLOPPINESS=time_macros完成.
+   * 然后执行comake2.第一次编译可能时间略微会增加,然后第二次编译速度就会飞快.
+   * 如果还有不明白使用的地方,可以邮件到zhangyan04@baidu.com或者直接问我(hi:dirlt).或者是自己查看ccache manual.
+
+*** 如何对make的编译和链接时间计时
+使用comake2参数--time-compile-link这个选项,可以在生成的Makefile部分进行插桩.
+进行编译和链接命令都会进行计时.编译和链接的计时结果,会追加在代码树最顶层的
+COMAKE.compile.time.log以及COMAKE.link.time.log文件下面.
+
+*** 如何尽可能链接.so加快链接时间
+通常编译一个大模块的话,需要对外部模块的.a链接相当多次.如果链接花去相当长时间
+的话,那么将这些.a都变成成为.so,然后进行链接的话会节省相当多的时间.
+
+首先在构建环境的时候,需要加上--build-shared-library选项.这个选项尽可能地将
+外部模块打包成为.so.生成的.so文件会放在代码树最顶层,名字成为libCOMAKE-package.so.
+
+选项--preferred-use-shared-library会尽可能地将外部模块的.a进行解包然后判断是否编译
+成为.so文件.如果可以编译成为.so文件的话,那么生成的Makefile就会尽可能地使用.so
+而不是是用.a文件.使用的.so文件,也是--build-shared-library选项生成的
+libCOMAKE-package.so个文件.
+
+*** 自动升级问题
+   * 自动升级必须必须让OP在crontab里面加入,而不能够每次RD启动comake2就执行
+   * 原因是因为权限问题.如果comake2是安装在/usr/bin下面的话,用启动时没有权限去覆盖/usr/bin下面文件的
+   * OK,seteuid是一种方式,但是因为comake2是一个脚本而不是原生可执行程序,我们必须通过chmod u+s /usr/bin/python来完成
+   * 然后很多用户都是自己安装的python,即使seteuid也没有任何用途.
+   * 执行更新的方式crontab脚本应该cd $COMAKE/libcmake2;python auto_update.py来完成更新.必须切换目录.
+
+*** comake2版本问题
+   * comake2RD在提交之前,需要之前./MakeInternalVersion.sh这个脚本
+   * 这个脚本的工作取出当前com产品线的HEAD revision作为版本号
+   * 然后把这个版本号写入COMAKE.VERSION文件
+   * 没有使用自动原因是因为SCM没有提供svn的keyword subsitution这个功能
+   * 如果SCM提供了这个功能的话,那么其实COMAKE.VERSION里面只要写$Revision$标记就好了.
+
+*** 模块代码TAG和依赖TAG
+对于依赖的模块,我们使用这个模块的3个版本
+   * trunk主干
+   * branch分支
+   * tag
+comake2对于每一个模块,必须知道这个模块的子依赖,才可以帮助RD搭建和更新环境.但是现在存在这样一个问题.
+trunk和branch是没有任何依赖信息的.comake2在这个问题上的解决方法是
+   1. CONFIGS('public/ub')表示使用public/ub的基线代码和基线依赖
+   2. CONFIGS('public/ub@trunk')表示使用ub的trunk代码和基线依赖
+   3. CONFIGS('public/ub@public_1-0-395_BRANCH')表使用ub的BRANCH代码和基线依赖
+   4. CONFIGS('public/ub@1.4.4.0')表示使用ub的1.4.4.0的代码和1.4.4.0的依赖
+   5. CONFIGS('public/ub@trunk@1.4.4.0')表示使用ub的trunk代码和1.4.4.0的依赖.这种方式允许用户显示指定使用某个TAG的依赖
+   6. CONFIGS('public/ub@trunk@COMAKE')表示使用ub的trunk代码和trunk代码中COMAKE所指定的依赖.
+下面是形式化描述方法
+| 形式                  | 代码   | 依赖     |
+|-----------------------+--------+----------|
+| cvspath               | 基线   | 基线     |
+| cvspath@tag1          | tag1   | tag1     |
+| cvspath@base          | 基线   | 基线     |
+| cvspath@trunk         | trunk  | 基线     |
+| cvspath@branch        | branch | 基线     |
+| cvspath@ci            | trunk  | COMAKE   |
+| cvspath@tag1@tag2     | tag1   | tag2     |
+| cvspath@base@tag2     | 基线   | tag2     |
+| cvspath@trunk@tag2    | trunk  | tag2     |
+| cvspath@branch@tag2   | branch | tag2     |
+| cvspath@tag1@comake   | tag1   | COMAKE   |
+| cvspath@base@comake   | 基线   | COMAKE   |
+| cvspath@trunk@comake  | trunk  | COMAKE   |
+| cvspath@branch@comake | branch | COMAKE   |
+| cvspath@tag1@base     | tag1   | 基线     |
+| cvspath@base@base     | 基线   | 基线     |
+| cvspath@trunk@base    | trunk  | 基线     |
+| cvspath@branch@base   | branch | 基线     |
+| cvspath@tag1@null     | tag1   | 没有依赖 |
+| cvspath@base@null     | 基线   | 没有依赖 |
+| cvspath@trunk@null    | trunk  | 没有依赖 |
+| cvspath@branch@null   | branch | 没有依赖 |
+
+*** 编译依赖获取,打平,冲突处理.
+**** 依赖获取
+如果用户使用下面写法
+#+BEGIN_SRC Python
+CONFIGS('XXX@TAG1@TAG2')
+#+END_SRC
+那么依赖是以XXX的TAG2,通过SCM提供的HTTP接口请求,拿到SCM上面数据来完成的.
+
+如果用户使用下面写法
+#+BEGIN_SRC Python
+CONFIGS('XXX@TAG1/trunk/branch@COMAKE')
+#+END_SRC
+那么依赖是从TAG1/trunk/branch的代码下面COMAKE文件里面分析出来的.没错,也就是说,
+如果每个模块都是用COMAKE来描述的话,那么是不需要向SCM去取编译依赖的.
+
+**** 子目录依赖
+如果COMAKE里面存在Directory的话,那么会收集目录下面COMAKE所编写的编译依赖,一起收集到本层然后来打平和处理冲突.这样comake2 -U
+或者是comake2 -B的话就可以一次性构建好环境.
+
+但是在生成Makefile阶段的时候,我们不会从Directory中收集编译依赖上来.这是因为如果我们从Directory收集上来这些编译依赖之后,
+实际上潜在地引入了一些我们不太需要的模块.
+
+对于每一个Directory目标的话,默认会进入子目录帮助生成Makefile.但是如果使用了-no-recursive这个选项的话,那么不会进入子目录生成.
+
+**** 依赖打平
+   1. 从COMAKE文件中得到所有的CONFIGS内容,以集合A表示.
+   2. B={}.for x in A:B.add(x.Depends())
+   3. B=B \ A
+   4. 对于B集合中同名依赖,使用冲突处理去重.
+   5. if(B.IsEmpty()):goto 7
+   6. A+=B.goto 2
+   7. A就是打平之后的依赖.
+
+**** 冲突处理
+现在comake2内部有一套默认冲突处理方式
+   1. 如果都是4位tag的话,那么使用最新的4位版本.
+   2. 在指定objects和没有制定objects之间,优先选择指定objects的模块.
+比如CONFIGS('third-64/tbb',Libraries('./lib/libtbb.a'))和CONFIGS('third-64/tbb')的话,优先会选择前者.
+
+对于不能够处理的冲突,会报告冲突,产生错误然后让用户在上层就是显式地在COMAKE文件里面指定.
+
+*** 更新依赖逻辑
+   * 如果代码在本地不存在,那么直接checkout.
+   * 如果代码在本地已经存在的话.
+      1. 首先svn st.如果失败的话,那么直接退出.
+      2. 然后直接switch.
+   * 如果代码在本地存在,并且强制更新的话,那么首先rm -rf删除然后重新checkout.
+
+*** 编译依赖逻辑
+   * 如果子依赖重新编译,那么需要重新编译.
+   * 检查依赖模块目录下面存在.COMAKE.BUILDED.TAG文件.
+   * 如果存在,并且没有任何其他文件时间比这个文件时间新,那么不进行编译.
+   * 如果不存在,或者是存在其他文件时间更新,那么进行编译.
+   * 如果重新编译之后,重新新建一个.COMAKE.BUILDED.TAG文件.
+
+** FAQ
+*** LDFLAGS和LIBS差别
+COMAKE提供了两种写法
+   1. LDFLAGS('-lrt -lpthread')
+   2. LIBS('./libcompiler.a')
+两种方式都是提供链接参数,但是对于生成的Makefile稍有不同.假设用户的COMAKE是这样写的话
+#+BEGIN_SRC Python
+LDFLAGS('-lrt -lpthread')
+Application('a',Sources('a.cpp'))
+#+END_SRC
+
+方式1会认为里面参数不是文件而仅仅是一系列未知的编译参数,所以不会做为依赖反映在Makefile里面.
+#+BEGIN_EXAMPLE
+a:a.o 
+    g++ -o a a.o -lrt -lpthread
+#+END_EXAMPLE
+
+方式2会认为里面参数是一系列文件,所以会做为依赖反映在Makefile里面.
+#+BEGIN_EXAMPLE
+a:a.o libcompiler.a
+    g++ -o a a.o libcompiler.a
+#+END_EXAMPLE
+
+*** 如何把conf目录下面文件发布到output下面
+增加下面的代码到COMAKE中
+#+BEGIN_SRC Python
+TARGET('.copy-conf',
+       ShellCommands('touch .copy-conf',
+                     'mkdir -p output/conf',
+                     'cp conf/* output/conf'),
+       CleanCommands('rm -rf output/conf'))
+#+END_SRC
+
+*** 如何编写UnitTest的COMAKE文件
+#+BEGIN_SRC Python
+import glob
+import os
+test_source_files=glob.glob("*.cpp")
+for x in test_source_files:
+    root=os.path.splitext(x)[1]
+    Application(root,Sources(x))
+#+END_SRC
+
+*** 如果不想发布到output目录下面
+以下面为例,我们只需要加上OutputPath('')选项即可
+#+BEGIN_SRC Python
+Application('test',Sources('test.cpp'),OutputPath(''))
+#+END_SRC

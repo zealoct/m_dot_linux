@@ -1,0 +1,2 @@
+__$NAME$__ : __$DEPFILES_VALUE$__
+__$SHELL_LINES$__

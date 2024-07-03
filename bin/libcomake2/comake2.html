@@ -1,0 +1,1359 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>comake2</title>
+<meta http-equiv="Content-Type" content="text/html;charset=gb2312"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-03-10 19:44:31 CST"/>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+/* the pre markup was derived from rubyStyle.css, the rest is from previous
+iterations of my website http://repose.cx/. help yourself to bits you like. */
+
+body {
+  font: 14px/1.2 Bitstream Vera Sans, Tahoma, sans-serif;
+  background: #bbccdd;
+  padding-left: 12%;
+  padding-right: 10%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: 0;
+}
+ 
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #00008b;
+}
+
+a:hover {
+  background: #00008b;
+  color: #fff;
+}
+
+/*
+h1 {
+  font-family: Bitstream Vera Sans, Tahoma, SimHei, sans-serif;
+  font-size: 32px;
+  color: #666;
+  padding: 2px;
+  margin-left: -40px;
+  margin-bottom: 8px;
+  border-bottom: 5px solid #000;
+}
+*/
+
+h1 {
+  font-family: Bitstream Vera Sans, Tahoma, SimHei, sans-serif;
+  font-size: 24px;
+  color: #0000ff;
+  padding: 2px;
+  margin-left: -30px;
+  margin-top: 5px;
+  border-bottom: 3px solid #222;
+  <lisp>(funcall emacs-wiki-menu-factory)</lisp>
+}
+
+h2 {
+  font-family: Bitstream Vera Sans, Tahoma, SimHei, sans-serif;
+  font-size: 20px;
+  color: #1207ec;
+  padding: 2px;
+  margin-left: -20px;
+  margin-top: 5px;
+  border-bottom: 2px solid #222;
+}
+
+h3 {
+  font-family: Bitstream Vera Sans, Tahoma, SimHei, sans-serif;
+  font-size: 18px;
+  color: #761987;
+  padding: 2px;
+  margin-left: -10px;
+  margin-top: 5px;
+  border-bottom: 1px solid #222;
+}
+
+h4 {
+  font-family: Bitstream Vera Sans, Tahoma, SimHei, sans-serif;
+  font-size: 16px;
+  color: #222;
+  padding: 2px;
+  /*margin-bottom: -5px;*/
+  border-top: 1px dashed #666;
+  border-bottom: 1px dashed #666;
+}
+
+img {
+  background: #bbccdd;
+  float: none;
+  margin-bottom: -5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #00008b;
+}
+
+#im {
+  clear: right;
+}
+
+pre {
+  font: 12px/1.2 Courier New, Bitstream Vera Sans Mono, sans-serif;
+  border: #777 1px solid;
+  padding: 0.5em;
+  margin-left: 2em;
+  margin-right: 2em;
+  white-space: pre;
+  background-color: #e6e6e6;
+  color: black;
+}
+
+.verse {
+  white-space: pre;
+  margin-left: 1em;
+}
+
+dt {
+  font-weight: bold;
+}
+
+li {
+  margin-bottom: 0.9ex;
+}
+
+table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 0;
+}
+
+td {
+  font-size: 14px;
+  border-left: ButtonHighlight 1px solid;
+  border-right: ButtonShadow 1px solid;
+  border-top: ButtonHighlight 1px solid;
+  border-bottom: ButtonShadow 1px solid;
+  padding-left: 3px;
+  padding-right: 2px;
+  overflow: hidden;
+  background: #ddeecc;
+}
+
+th {
+  font-size: 14px;
+  border-left: ButtonHighlight 1px solid;
+  border-right: ButtonShadow 1px solid;
+  border-top: ButtonHighlight 1px solid;
+  border-bottom: ButtonShadow 1px solid;
+  padding-left: 3px;
+  padding-right: 2px;
+  overflow: hidden;
+  background: #eeeecc;
+}
+
+.navfoot {
+  margin-left: -30px;
+  text-align: center;
+}
+
+/*menu*/
+.menu {
+  <lisp>(funcall emacs-wiki-menu-factory)</lisp>
+  background: #edf2f2;
+  color: white;
+  border-top: 8px solid #e0e9e9;
+  border-bottom: 8px solid #e0e9e9;
+  content: "";
+  display: inline-table;
+  float: right;
+  padding: 0;
+}
+
+.menuitem {
+  font: 14px Bitstream Vera Sans, Tahoma, sans-serif;
+  margin: 0;
+  text-align: right;
+}
+
+.menuitem a:link, .menuitem a:visited {
+  display: block;
+  padding: 2px 10px 2px 10px;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #ddd;
+  color: #00008b;
+  text-decoration: none;
+}
+
+.menuitem a:hover {
+  color: #00008b;
+  background: #cceeff;
+}
+
+/* Uncomment this if you want characters to appear before a menu
+   entry when hovering the mouse over it.
+
+.menuitem a:hover:before { content:">> "}
+*/
+
+.menu:before {
+  /*color: transparent;*/
+  display: block;
+  content: "";
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.menu:after {
+  /*color: transparent;*/
+  display: block;
+  content: "";
+  border-top: 1px solid #fff;
+  text-align: center;
+}
+
+#tooltipbox {
+  float: right;
+  /*visibility: hidden;*/
+}
+
+#tooltip {
+  color: #666;
+}
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">comake2</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 comake2使用说明 </a>
+<ul>
+<li><a href="#sec-1_1">1.1 comake2概述 </a></li>
+<li><a href="#sec-1_2">1.2 如何快速使用comake2 </a></li>
+<li><a href="#sec-1_3">1.3 使用comake2例子 </a>
+<ul>
+<li><a href="#sec-1_3_1">1.3.1 COMAKE文件 </a></li>
+<li><a href="#sec-1_3_2">1.3.2 COMAKE文件剖析 </a></li>
+<li><a href="#sec-1_3_3">1.3.3 comake2执行过程 </a></li>
+</ul>
+</li>
+<li><a href="#sec-1_4">1.4 comake2高级部分 </a>
+<ul>
+<li><a href="#sec-1_4_1">1.4.1 comake2运行时环境 </a></li>
+<li><a href="#sec-1_4_2">1.4.2 编译环境搭建 </a></li>
+<li><a href="#sec-1_4_3">1.4.3 COMAKE文件元素 </a>
+<ul>
+<li><a href="#sec-1_4_3_1">1.4.3.1 编译标签 </a></li>
+<li><a href="#sec-1_4_3_2">1.4.3.2 编译实体 </a>
+<ul>
+<li><a href="#sec-1_4_3_2_1">1.4.3.2.1 CONFIGS </a></li>
+<li><a href="#sec-1_4_3_2_2">1.4.3.2.2 Application/StaticLibrary/SharedLibrary </a></li>
+<li><a href="#sec-1_4_3_2_3">1.4.3.2.3 Directory </a></li>
+<li><a href="#sec-1_4_3_2_4">1.4.3.2.4 TARGET </a></li>
+<li><a href="#sec-1_4_3_2_5">1.4.3.2.5 Sources </a></li>
+</ul></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-1_5">1.5 comake2其他问题 </a>
+<ul>
+<li><a href="#sec-1_5_1">1.5.1 2010Q4产品创新奖申请语 </a></li>
+<li><a href="#sec-1_5_2">1.5.2 如何配合使用ccache </a></li>
+<li><a href="#sec-1_5_3">1.5.3 如何对make的编译和链接时间计时 </a></li>
+<li><a href="#sec-1_5_4">1.5.4 如何尽可能链接.so加快链接时间 </a></li>
+<li><a href="#sec-1_5_5">1.5.5 自动升级问题 </a></li>
+<li><a href="#sec-1_5_6">1.5.6 comake2版本问题 </a></li>
+<li><a href="#sec-1_5_7">1.5.7 模块代码TAG和依赖TAG </a></li>
+<li><a href="#sec-1_5_8">1.5.8 编译依赖获取,打平,冲突处理. </a>
+<ul>
+<li><a href="#sec-1_5_8_1">1.5.8.1 依赖获取 </a></li>
+<li><a href="#sec-1_5_8_2">1.5.8.2 子目录依赖 </a></li>
+<li><a href="#sec-1_5_8_3">1.5.8.3 依赖打平 </a></li>
+<li><a href="#sec-1_5_8_4">1.5.8.4 冲突处理 </a></li>
+</ul>
+</li>
+<li><a href="#sec-1_5_9">1.5.9 更新依赖逻辑 </a></li>
+<li><a href="#sec-1_5_10">1.5.10 编译依赖逻辑 </a></li>
+</ul>
+</li>
+<li><a href="#sec-1_6">1.6 FAQ </a>
+<ul>
+<li><a href="#sec-1_6_1">1.6.1 LDFLAGS和LIBS差别 </a></li>
+<li><a href="#sec-1_6_2">1.6.2 如何把conf目录下面文件发布到output下面 </a></li>
+<li><a href="#sec-1_6_3">1.6.3 如何编写UnitTest的COMAKE文件 </a></li>
+<li><a href="#sec-1_6_4">1.6.4 如果不想发布到output目录下面 </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> comake2使用说明 </h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+如果存在问题的话,请发送邮件到<a href="mailto:zhangyan04@baidu.com">zhangyan04@baidu.com</a>
+</p>
+<p>
+代码下载:<a href="https://svn.baidu.com/com/branches/tools/comake/com_1-0-85-1_BRANCH/">https://svn.baidu.com/com/branches/tools/comake/com<sub>1</sub>-0-85-1<sub>BRANCH</sub>/</a>
+</p>
+
+</div>
+
+<div id="outline-container-1_1" class="outline-3">
+<h3 id="sec-1_1"><span class="section-number-3">1.1</span> comake2概述 </h3>
+<div class="outline-text-3" id="text-1_1">
+
+<p>comake2允许用户通过编写COMAKE文件,来帮助用户管理编译依赖以及编译环境的开发工具
+</p><ol>
+<li>
+comake2能够帮助用户生成较可读可调试的Makefile
+</li>
+<li>
+comake2能够自动帮助用户搭建编译环境
+</li>
+<li>
+comake2能够允许用户实施持续集成开发
+</li>
+</ol>
+
+<p>comake2是Python编写的,所需要的COMAKE文件也是实际上也是一个Python脚本.
+所以懂一些Python会更好,不过comake2在设计的时候尽量让用户感觉不到是在写脚本而更像是在写配置.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_2" class="outline-3">
+<h3 id="sec-1_2"><span class="section-number-3">1.2</span> 如何快速使用comake2 </h3>
+<div class="outline-text-3" id="text-1_2">
+
+<p>使用comake2 -h/&ndash;help就可以查看帮助了.
+</p>
+
+
+<pre class="example">comake[com make]能够自动帮助用户搭建环境,并且生成Makefile工具.
+程序会读取目录下面的COMAKE文件,产生Makefile和环境.用户需要提供这个COMAKE文件.
+版本:%d
+参数:
+        -h --help 查看帮助
+        -D --debug 开启debug选项[默认不打开].-D -D可以查看更多调试信息.
+        -S --scratch 创建一个默认的COMAKE文件
+        -E --export-configs 导出模块的4位版本依赖,存放在COMAKE.CONFIGS下面.比如-E public/ub@1.0.0.0
+        -W --watch-configs 查看本地依赖模块.-W -W可以查看模块引入来源.-W -W -W可以查看依赖模块的依赖.
+        -I --import-files 在解释COMAKE文件之前导入模块
+        -C --change directory 切换到directory下面执行[默认当前目录]
+        -Q --quiet 安静模式[默认不打开]
+        -U --update-configs 更新环境
+        -B --build-configs 构建环境
+        -F --force 更新/构建环境时强制进行[默认不打开]
+        -J --make-thread-number 如果模块使用COMAKE生成的Makefile的话,编译线程数
+        -K --keep-going 构建/更新环境中途出错的话,忽略错误继续[默认不打开]
+        --no-recursive 不递归生成每个目录下面的Makefile[默认情况下是递归生成]
+        --time-compile-link 计时编译和链接时间[默认不打开]
+</pre>
+
+
+<ol>
+<li>
+使用comake2 -S就可以在当前目录下面产生一个空COMAKE文件了,这样能够节省用户从头开发编写的时间.
+</li>
+<li>
+然后用户只需要修改COMAKE文件,然后再次使用comake2,接着就会产生Makefile文件.然后就可以直接make了.
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_3" class="outline-3">
+<h3 id="sec-1_3"><span class="section-number-3">1.3</span> 使用comake2例子 </h3>
+<div class="outline-text-3" id="text-1_3">
+
+<p>假设我们/home/rd/cvs是我们的代码树顶层目录,我们的项目是com/mock[所以在目录/home/rd/cvs/com/mock下面].我们所有的源文件有mock.cpp,mock.h,run_mock.cpp这3个文件,我们希望产生
+</p><ul>
+<li>
+libmock.a这个静态链接库
+</li>
+<li>
+run_mock可执行程序,依赖libmock.a这个库
+</li>
+</ul>
+
+<p>我们依赖了public/ub这个环境.我们使用comake2 -S产生COMAKE文件并且调整如下.
+</p>
+
+</div>
+
+<div id="outline-container-1_3_1" class="outline-4">
+<h4 id="sec-1_3_1"><span class="section-number-4">1.3.1</span> COMAKE文件 </h4>
+<div class="outline-text-4" id="text-1_3_1">
+
+
+
+
+<pre class="src src-Python">#edit-mode: -*- python -*-
+#coding:gbk
+
+#&#24037;&#20316;&#36335;&#24452;.
+WORKROOT('../../')
+
+#C&#39044;&#22788;&#29702;&#22120;&#21442;&#25968;.
+CPPFLAGS('-D_GNU_SOURCE -D__STDC_LIMIT_MACROS -DVERSION=\\\"1.9.8.7\\\"')
+
+#C&#32534;&#35793;&#21442;&#25968;.
+CFLAGS('-g -pipe -W -Wall')
+
+#C++&#32534;&#35793;&#21442;&#25968;.
+CXXFLAGS('-g -pipe -W -Wall')
+
+#IDL&#32534;&#35793;&#21442;&#25968;
+IDLFLAGS('--compack')
+
+#&#22836;&#25991;&#20214;&#36335;&#24452;.
+INCPATHS('. ./include ./output ./output/include')
+
+#&#38142;&#25509;&#21442;&#25968;.
+LDFLAGS('-lpthread -lcrypto')
+
+#&#20381;&#36182;&#27169;&#22359;
+CONFIGS('public/ub')
+
+Application('run_mock',Sources('run_mock.cpp','mock.cpp'))
+StaticLibrary('mock',Sources('mock.cpp'),HeaderFiles('mock.h'))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_3_2" class="outline-4">
+<h4 id="sec-1_3_2"><span class="section-number-4">1.3.2</span> COMAKE文件剖析 </h4>
+<div class="outline-text-4" id="text-1_3_2">
+
+<ul>
+<li>
+#edit-mode以及#coding这两行,仅仅是告诉你的编辑器[vi/emacs]这个文件是python格式的.事实上COMAKE就是Python格式文件,comake2也是使用python编写的.
+</li>
+<li>
+WORKROOT('../../'),告诉当前的根目录在../../
+</li>
+<li>
+CPPFLAGS,CFLAGS,CXXFLAGS,IDLFLAGS,分别表示C预处理器,C编译器,C++编译器,以及IDL编译器的编译参数.
+</li>
+<li>
+INCPATHS,表示自己内部目录的头文件路径
+</li>
+<li>
+LDFLAGS,表示对于应用程序应该链接什么外部库
+</li>
+<li>
+CONFIGS,表示使用什么模块.我们这里使用public/ub.如果使用comake2 -S产生的话,默认是使用基线.
+</li>
+<li>
+Application,说明编译应用程序run_mock,依赖了后面几个sources
+</li>
+<li>
+StaticLibrary,说明我们想编译一个静态链接库,依赖后面几个source,并且发布文件mock.h
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_3_3" class="outline-4">
+<h4 id="sec-1_3_3"><span class="section-number-4">1.3.3</span> comake2执行过程 </h4>
+<div class="outline-text-4" id="text-1_3_3">
+
+<p>编写好了COMAKE文件之后,那么可以使用comake2了.
+</p><ul>
+<li>
+如果你还没有public/ub的话,可以comake2 &ndash;update-configs或者执行comake2 -U.
+</li>
+<li>
+如果你有了public/ub的话,需要重新编译,可以comake2 &ndash;build-configs或者执行comake2 -B.
+</li>
+<li>
+如果你已经有环境的话,那么直接执行comake2就会产生Makefile文件.
+</li>
+<li>
+完成之后你就可以直接执行make了.默认情况下面有这些目标
+<ul>
+<li>
+all 构建所有Target.构建Target就会默认地copy到output目录西脉案.
+</li>
+<li>
+clean 删除所有产生Target以及中间文件.
+</li>
+<li>
+dist 把所有文件打包走,成为.tar.gz文件.产生的文件在上一层目录.
+</li>
+<li>
+love 什么东西最能够让你high呢?of course.make love:)
+</li>
+<li>
+test make -C test进行测试目录.
+</li>
+</ul>
+</li>
+<li>
+注意对于Directory的目标l会进入下一级生成Makefile.如果不想这么做的话,那么可以使用&ndash;no-recursive选项.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1_4" class="outline-3">
+<h3 id="sec-1_4"><span class="section-number-3">1.4</span> comake2高级部分 </h3>
+<div class="outline-text-3" id="text-1_4">
+
+
+</div>
+
+<div id="outline-container-1_4_1" class="outline-4">
+<h4 id="sec-1_4_1"><span class="section-number-4">1.4.1</span> comake2运行时环境 </h4>
+<div class="outline-text-4" id="text-1_4_1">
+
+<ul>
+<li>
+comake2是Python编写的,COMAKE文件本质上也是Python脚本,不过comake2提供了COMAKE文件的运行时
+</li>
+<li>
+comake2在外围定义了一个Environment类,并且产生了一个ENV实例.
+</li>
+<li>
+comake2同时定义了很多标签,比如WORKROOT,CPPFLAGS,CFLAGS,Application.操作这些标签时候会被记录进入ENV这个实例.
+</li>
+<li>
+comake2在运行的时候,首先from Environment import *,然后execfile('COMAKE')这个脚本.执行完成脚本之后,在ENV就获得了所有的COMAKE提供的信息
+</li>
+<li>
+执行完COMAKE之后,comake2内部就可以通过这些信息来完成编译环境搭建和Makefile生成.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_2" class="outline-4">
+<h4 id="sec-1_4_2"><span class="section-number-4">1.4.2</span> 编译环境搭建 </h4>
+<div class="outline-text-4" id="text-1_4_2">
+
+<ul>
+<li>
+如果用户执行&ndash;build-configs这个选项的话就会帮助用户搭建环境.
+</li>
+<li>
+首先根据COMAKE里面所有提供到的依赖模块信息,得到所有指定的依赖模块.
+</li>
+<li>
+然后向SCM查询这些模块的二级依赖,然后得到所有依赖模块以及版本.
+</li>
+<li>
+如果用户执行&ndash;update-configs这个参数,那么我们就会去尝试编译环境.
+</li>
+<li>
+如果没有目录存在的话,我们就直接checkout出来.如果目录存在的话,那么我们会svn sw来尝试merge.或者用户也可以放弃进行merge.
+</li>
+<li>
+然后开始编译.我们会对每个模块编译首先make clean然后再make.
+</li>
+<li>
+编译环境的如果模块使用COMAKE编写会make -j 4来编译模块.参数-J的话可以指定线程数.否则使用make -j来编译.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3" class="outline-4">
+<h4 id="sec-1_4_3"><span class="section-number-4">1.4.3</span> COMAKE文件元素 </h4>
+<div class="outline-text-4" id="text-1_4_3">
+
+
+</div>
+
+<div id="outline-container-1_4_3_1" class="outline-5">
+<h5 id="sec-1_4_3_1"><span class="section-number-5">1.4.3.1</span> 编译标签 </h5>
+<div class="outline-text-5" id="text-1_4_3_1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">元素名称</th><th scope="col" class="left">作用</th><th scope="col" class="left">example</th><th scope="col" class="left">注意事项</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">WORKROOT</td><td class="left">当前工作路径</td><td class="left">WORKROOT('../../')</td><td class="left">最好使用相对路径</td></tr>
+<tr><td class="left">MakeThreadNumber</td><td class="left">使用多少个线程进行make</td><td class="left">MakeThreadNumber(4)</td><td class="left">相当于执行使用make -j[废弃]</td></tr>
+<tr><td class="left">CopyUsingHardLink</td><td class="left">copy使用硬链接</td><td class="left">CopyUsingHardLink(True)</td><td class="left"></td></tr>
+<tr><td class="left">CPPFLAGS</td><td class="left">C预处理参数</td><td class="left">CPPFLAGS('-DGNU_SOURCE')</td><td class="left"></td></tr>
+<tr><td class="left">CFLAGS</td><td class="left">C编译参数</td><td class="left">CFLAGS('-g -Wall','-O2')</td><td class="left"></td></tr>
+<tr><td class="left">CXXFLAGS</td><td class="left">C++编译参数</td><td class="left">CXXFLAGS('-g -Wall','-O2')</td><td class="left"></td></tr>
+<tr><td class="left">INCPATHS</td><td class="left">搜索头文件路径</td><td class="left">INCPATHS('. ./include')</td><td class="left">这里不要加上-I前缀.</td></tr>
+<tr><td class="left">LIBS</td><td class="left">链接使用的库文件</td><td class="left">LIBS('./libmock.a')</td><td class="left"></td></tr>
+<tr><td class="left">LDFLAGS</td><td class="left">链接参数</td><td class="left">LDFLAGS('-lpthread -lcrypto')</td><td class="left"></td></tr>
+<tr><td class="left">IDLFLAGS</td><td class="left">IDL编译参数</td><td class="left">IDLFLAGS('&ndash;compack &ndash;ns=mock')</td><td class="left">实际上是mcy的编译参数</td></tr>
+<tr><td class="left">UBRPCFLAGS</td><td class="left">UBRPCGEN编译参数</td><td class="left">UBRPCFLAGS('&ndash;compack')</td><td class="left"></td></tr>
+<tr><td class="left">ImportConfigsFrom</td><td class="left">从其他目录的COMAKE继承模块</td><td class="left">ImportConfigsFrom('..')</td><td class="left"></td></tr>
+<tr><td class="left">ReplaceExtNameWith</td><td class="left">替换文件后缀名</td><td class="left">ReplaceExtNameWith('x.cpp y.cpp','.cpp','.o')</td><td class="left"></td></tr>
+<tr><td class="left">GetEnv</td><td class="left">获得环境变量</td><td class="left">GetEnv('USER')</td><td class="left">如果没有特定key的话,返回'undefined'</td></tr>
+<tr><td class="left">BuildVersion</td><td class="left">获取编译版本</td><td class="left">BuildVersion()</td><td class="left">等效于GetEnv('COMAKE2<sub>BUILD</sub><sub>VERSION'</sub>)</td></tr>
+</tbody>
+</table>
+
+
+<ul>
+<li>
+INCPATHS允许使用$开头,代表路径相对于WORKROOT.注意不要写成\(/而应该是\).比如INCPATHS('$public/ub')
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3_2" class="outline-5">
+<h5 id="sec-1_4_3_2"><span class="section-number-5">1.4.3.2</span> 编译实体 </h5>
+<div class="outline-text-5" id="text-1_4_3_2">
+
+
+</div>
+
+<div id="outline-container-1_4_3_2_1" class="outline-6">
+<h6 id="sec-1_4_3_2_1"><span class="section-number-6">1.4.3.2.1</span> CONFIGS </h6>
+<div class="outline-text-6" id="text-1_4_3_2_1">
+
+<ul>
+<li>
+表示依赖什么模块.
+</li>
+<li>
+比如CONFIGS('public/ub')
+</li>
+<li>
+如果需要制定版本号的话,可以这样完成CONFIGS('public/ub@1.0.0.0')或者是CONFIGS('public/ub@ub_1-0-0-0_PD_BL')
+</li>
+<li>
+默认情况下我们会猜测头文件搜索路径是(. ./include ./output ./output/include),如果找不到的话,可以通过IncludePaths来指定
+</li>
+<li>
+比如CONFIGS('ps/spider/bddb',IncludePaths('./client/include'))
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3_2_2" class="outline-6">
+<h6 id="sec-1_4_3_2_2"><span class="section-number-6">1.4.3.2.2</span> Application/StaticLibrary/SharedLibrary </h6>
+<div class="outline-text-6" id="text-1_4_3_2_2">
+
+<ul>
+<li>
+表示产生应用程序/静态库/共享库.
+</li>
+<li>
+比如Application('mock',Depends(Sources('mock.cpp')))
+</li>
+</ul>
+
+<p>可以使用的编译参数包括
+</p><ul>
+<li>
+Sources.表示所依赖的源文件.Sources相对于下面的编译参数都比较特殊,里面还可以有编译参数,所以放在编译实体这节介绍.
+</li>
+<li>
+Depends.表示依赖什么模块下面的库文件,比如Depends('public/ub:./output/lib/libub.a')
+</li>
+<li>
+Prefixes.表示在这个目标执行之前,依赖什么目标.
+</li>
+<li>
+Depends.same as Prefixes.
+</li>
+<li>
+OutputPath.发布路径.如果填写空的话,表示不发布.应用程序发布到output/bin,静态库发布到output/lib,动态库发布到output/so.
+</li>
+<li>
+Libraries.编译应用程序希望使用的库文件.
+</li>
+<li>
+LinkFlags.编译应用程序希望使用的链接参数.
+</li>
+<li>
+HeaderFiles.静态库依赖的头文件.
+</li>
+<li>
+HeaderOutputPath.静态库头文件发布路径.默认发布到output/include下面.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3_2_3" class="outline-6">
+<h6 id="sec-1_4_3_2_3"><span class="section-number-6">1.4.3.2.3</span> Directory </h6>
+<div class="outline-text-6" id="text-1_4_3_2_3">
+
+<ul>
+<li>
+表示执行一个目录.
+</li>
+<li>
+比如Directory('hello')的话,那么产生动作就是make -C hello.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3_2_4" class="outline-6">
+<h6 id="sec-1_4_3_2_4"><span class="section-number-6">1.4.3.2.4</span> TARGET </h6>
+<div class="outline-text-6" id="text-1_4_3_2_4">
+
+<ul>
+<li>
+表示一个模糊目标,需要用户自己提供动作,可以使用编译参数ShellCommands来指定.
+</li>
+<li>
+理论上任何Makefile完成的目标都可以通过TARGET来指定.
+</li>
+</ul>
+
+<p>可以使用的编译参数包括
+</p><ul>
+<li>
+PhonyMode.这个目标是否应该每次执行.不对应任何文件.
+</li>
+<li>
+CleanFiles.如果执行clean时候应该删除的文件.
+</li>
+<li>
+ShellCommands.对应的shell命令.
+</li>
+<li>
+CleanCommands.在make clean时候的命令.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_4_3_2_5" class="outline-6">
+<h6 id="sec-1_4_3_2_5"><span class="section-number-6">1.4.3.2.5</span> Sources </h6>
+<div class="outline-text-6" id="text-1_4_3_2_5">
+
+<ul>
+<li>
+用来描述源文件.
+</li>
+<li>
+比如Sources('a.cpp b.cpp')等.
+</li>
+<li>
+可以使用GLOB函数来匹配批量文件.比如GLOB('*.cpp *.h').
+</li>
+</ul>
+
+<p>可以使用的编译参数包括
+</p><ul>
+<li>
+IncludePaths.编译这个源文件还需要使用头文件搜索路径.
+</li>
+<li>
+FileMode.文件模式.默认情况下面我们会处理.cpp.c等文件,如果不希望被处理的话,那么可以使用FileMode(True)通知.
+</li>
+<li>
+CppFlags/CFlags/CxxFlags/IdlFlags/UbRpcFlags.各种编译参数.如果没有制定的话,那么会使用全局指定的.
+</li>
+<li>
+UseMcy/UseUbrpcgen.是否使用mcy和ubrpcgen来产生代码.
+</li>
+<li>
+Prefixes.源文件所依赖的目标.
+</li>
+<li>
+Depends.same as Prefixes.
+</li>
+</ul>
+
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1_5" class="outline-3">
+<h3 id="sec-1_5"><span class="section-number-3">1.5</span> comake2其他问题 </h3>
+<div class="outline-text-3" id="text-1_5">
+
+
+</div>
+
+<div id="outline-container-1_5_1" class="outline-4">
+<h4 id="sec-1_5_1"><span class="section-number-4">1.5.1</span> 2010Q4产品创新奖申请语 </h4>
+<div class="outline-text-4" id="text-1_5_1">
+
+<p>@20102120
+</p>
+<p>
+comake2主要解决了基于主干开发的一系列问题,主要包括如何管理代码主干的编译依赖以及如何自动更新本地依赖模块.
+现在comake2在Nova下面近30个模块都已经使用comake2来管理,效果良好.后期会使用comake2管理nova所有模块.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_2" class="outline-4">
+<h4 id="sec-1_5_2"><span class="section-number-4">1.5.2</span> 如何配合使用ccache </h4>
+<div class="outline-text-4" id="text-1_5_2">
+
+<ul>
+<li>
+首先必须确保安装好ccache.可以使用ccache -s查看ccache的统计状态.
+</li>
+<li>
+然后在COMAKE文件里面写好CC('ccache gcc')以及CXX('ccache g++').
+</li>
+<li>
+最好开启ccache忽略源代码中的_<sub>DATE</sub>_<sub>和</sub>_<sub>TIME</sub>_<sub>选项</sub>.可以使用export CCACHE<sub>SLOPPINESS</sub>=time<sub>macros完成</sub>.
+</li>
+<li>
+然后执行comake2.第一次编译可能时间略微会增加,然后第二次编译速度就会飞快.
+</li>
+<li>
+如果还有不明白使用的地方,可以邮件到zhangyan04@baidu.com或者直接问我(hi:dirlt).或者是自己查看ccache manual.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_3" class="outline-4">
+<h4 id="sec-1_5_3"><span class="section-number-4">1.5.3</span> 如何对make的编译和链接时间计时 </h4>
+<div class="outline-text-4" id="text-1_5_3">
+
+<p>使用comake2参数&ndash;time-compile-link这个选项,可以在生成的Makefile部分进行插桩.
+进行编译和链接命令都会进行计时.编译和链接的计时结果,会追加在代码树最顶层的
+COMAKE.compile.time.log以及COMAKE.link.time.log文件下面.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_4" class="outline-4">
+<h4 id="sec-1_5_4"><span class="section-number-4">1.5.4</span> 如何尽可能链接.so加快链接时间 </h4>
+<div class="outline-text-4" id="text-1_5_4">
+
+<p>通常编译一个大模块的话,需要对外部模块的.a链接相当多次.如果链接花去相当长时间
+的话,那么将这些.a都变成成为.so,然后进行链接的话会节省相当多的时间.
+</p>
+<p>
+首先在构建环境的时候,需要加上&ndash;build-shared-library选项.这个选项尽可能地将
+外部模块打包成为.so.生成的.so文件会放在代码树最顶层,名字成为libCOMAKE-package.so.
+</p>
+<p>
+选项&ndash;preferred-use-shared-library会尽可能地将外部模块的.a进行解包然后判断是否编译
+成为.so文件.如果可以编译成为.so文件的话,那么生成的Makefile就会尽可能地使用.so
+而不是是用.a文件.使用的.so文件,也是&ndash;build-shared-library选项生成的
+libCOMAKE-package.so个文件.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_5" class="outline-4">
+<h4 id="sec-1_5_5"><span class="section-number-4">1.5.5</span> 自动升级问题 </h4>
+<div class="outline-text-4" id="text-1_5_5">
+
+<ul>
+<li>
+自动升级必须必须让OP在crontab里面加入,而不能够每次RD启动comake2就执行
+</li>
+<li>
+原因是因为权限问题.如果comake2是安装在/usr/bin下面的话,用启动时没有权限去覆盖/usr/bin下面文件的
+</li>
+<li>
+OK,seteuid是一种方式,但是因为comake2是一个脚本而不是原生可执行程序,我们必须通过chmod u+s /usr/bin/python来完成
+</li>
+<li>
+然后很多用户都是自己安装的python,即使seteuid也没有任何用途.
+</li>
+<li>
+执行更新的方式crontab脚本应该cd $COMAKE/libcmake2;python auto<sub>update</sub>.py来完成更新.必须切换目录.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_6" class="outline-4">
+<h4 id="sec-1_5_6"><span class="section-number-4">1.5.6</span> comake2版本问题 </h4>
+<div class="outline-text-4" id="text-1_5_6">
+
+<ul>
+<li>
+comake2RD在提交之前,需要之前./MakeInternalVersion.sh这个脚本
+</li>
+<li>
+这个脚本的工作取出当前com产品线的HEAD revision作为版本号
+</li>
+<li>
+然后把这个版本号写入COMAKE.VERSION文件
+</li>
+<li>
+没有使用自动原因是因为SCM没有提供svn的keyword subsitution这个功能
+</li>
+<li>
+如果SCM提供了这个功能的话,那么其实COMAKE.VERSION里面只要写$Revision$标记就好了.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_7" class="outline-4">
+<h4 id="sec-1_5_7"><span class="section-number-4">1.5.7</span> 模块代码TAG和依赖TAG </h4>
+<div class="outline-text-4" id="text-1_5_7">
+
+<p>对于依赖的模块,我们使用这个模块的3个版本
+</p><ul>
+<li>
+trunk主干
+</li>
+<li>
+branch分支
+</li>
+<li>
+tag
+</li>
+</ul>
+
+<p>comake2对于每一个模块,必须知道这个模块的子依赖,才可以帮助RD搭建和更新环境.但是现在存在这样一个问题.
+trunk和branch是没有任何依赖信息的.comake2在这个问题上的解决方法是
+</p><ol>
+<li>
+CONFIGS('public/ub')表示使用public/ub的基线代码和基线依赖
+</li>
+<li>
+CONFIGS('public/ub@trunk')表示使用ub的trunk代码和基线依赖
+</li>
+<li>
+CONFIGS('public/ub@public<sub>1</sub>-0-395<sub>BRANCH'</sub>)表使用ub的BRANCH代码和基线依赖
+</li>
+<li>
+CONFIGS('public/ub@1.4.4.0')表示使用ub的1.4.4.0的代码和1.4.4.0的依赖
+</li>
+<li>
+CONFIGS('public/ub@trunk@1.4.4.0')表示使用ub的trunk代码和1.4.4.0的依赖.这种方式允许用户显示指定使用某个TAG的依赖
+</li>
+<li>
+CONFIGS('public/ub@trunk@COMAKE')表示使用ub的trunk代码和trunk代码中COMAKE所指定的依赖.
+</li>
+</ol>
+
+<p>下面是形式化描述方法
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">形式</th><th scope="col" class="left">代码</th><th scope="col" class="left">依赖</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">cvspath</td><td class="left">基线</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@tag1</td><td class="left">tag1</td><td class="left">tag1</td></tr>
+<tr><td class="left">cvspath@base</td><td class="left">基线</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@trunk</td><td class="left">trunk</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@branch</td><td class="left">branch</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@ci</td><td class="left">trunk</td><td class="left">COMAKE</td></tr>
+<tr><td class="left">cvspath@tag1@tag2</td><td class="left">tag1</td><td class="left">tag2</td></tr>
+<tr><td class="left">cvspath@base@tag2</td><td class="left">基线</td><td class="left">tag2</td></tr>
+<tr><td class="left">cvspath@trunk@tag2</td><td class="left">trunk</td><td class="left">tag2</td></tr>
+<tr><td class="left">cvspath@branch@tag2</td><td class="left">branch</td><td class="left">tag2</td></tr>
+<tr><td class="left">cvspath@tag1@comake</td><td class="left">tag1</td><td class="left">COMAKE</td></tr>
+<tr><td class="left">cvspath@base@comake</td><td class="left">基线</td><td class="left">COMAKE</td></tr>
+<tr><td class="left">cvspath@trunk@comake</td><td class="left">trunk</td><td class="left">COMAKE</td></tr>
+<tr><td class="left">cvspath@branch@comake</td><td class="left">branch</td><td class="left">COMAKE</td></tr>
+<tr><td class="left">cvspath@tag1@base</td><td class="left">tag1</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@base@base</td><td class="left">基线</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@trunk@base</td><td class="left">trunk</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@branch@base</td><td class="left">branch</td><td class="left">基线</td></tr>
+<tr><td class="left">cvspath@tag1@null</td><td class="left">tag1</td><td class="left">没有依赖</td></tr>
+<tr><td class="left">cvspath@base@null</td><td class="left">基线</td><td class="left">没有依赖</td></tr>
+<tr><td class="left">cvspath@trunk@null</td><td class="left">trunk</td><td class="left">没有依赖</td></tr>
+<tr><td class="left">cvspath@branch@null</td><td class="left">branch</td><td class="left">没有依赖</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_8" class="outline-4">
+<h4 id="sec-1_5_8"><span class="section-number-4">1.5.8</span> 编译依赖获取,打平,冲突处理. </h4>
+<div class="outline-text-4" id="text-1_5_8">
+
+
+</div>
+
+<div id="outline-container-1_5_8_1" class="outline-5">
+<h5 id="sec-1_5_8_1"><span class="section-number-5">1.5.8.1</span> 依赖获取 </h5>
+<div class="outline-text-5" id="text-1_5_8_1">
+
+<p>如果用户使用下面写法
+</p>
+
+
+<pre class="src src-Python">CONFIGS('XXX@TAG1@TAG2')
+</pre>
+
+
+<p>
+那么依赖是以XXX的TAG2,通过SCM提供的HTTP接口请求,拿到SCM上面数据来完成的.
+</p>
+<p>
+如果用户使用下面写法
+</p>
+
+
+<pre class="src src-Python">CONFIGS('XXX@TAG1/trunk/branch@COMAKE')
+</pre>
+
+
+<p>
+那么依赖是从TAG1/trunk/branch的代码下面COMAKE文件里面分析出来的.没错,也就是说,
+如果每个模块都是用COMAKE来描述的话,那么是不需要向SCM去取编译依赖的.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_8_2" class="outline-5">
+<h5 id="sec-1_5_8_2"><span class="section-number-5">1.5.8.2</span> 子目录依赖 </h5>
+<div class="outline-text-5" id="text-1_5_8_2">
+
+<p>如果COMAKE里面存在Directory的话,那么会收集目录下面COMAKE所编写的编译依赖,一起收集到本层然后来打平和处理冲突.这样comake2 -U
+或者是comake2 -B的话就可以一次性构建好环境.
+</p>
+<p>
+但是在生成Makefile阶段的时候,我们不会从Directory中收集编译依赖上来.这是因为如果我们从Directory收集上来这些编译依赖之后,
+实际上潜在地引入了一些我们不太需要的模块.
+</p>
+<p>
+对于每一个Directory目标的话,默认会进入子目录帮助生成Makefile.但是如果使用了-no-recursive这个选项的话,那么不会进入子目录生成.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_8_3" class="outline-5">
+<h5 id="sec-1_5_8_3"><span class="section-number-5">1.5.8.3</span> 依赖打平 </h5>
+<div class="outline-text-5" id="text-1_5_8_3">
+
+<ol>
+<li>
+从COMAKE文件中得到所有的CONFIGS内容,以集合A表示.
+</li>
+<li>
+B={}.for x in A:B.add(x.Depends())
+</li>
+<li>
+B=B \ A
+</li>
+<li>
+对于B集合中同名依赖,使用冲突处理去重.
+</li>
+<li>
+if(B.IsEmpty()):goto 7
+</li>
+<li>
+A+=B.goto 2
+</li>
+<li>
+A就是打平之后的依赖.
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_8_4" class="outline-5">
+<h5 id="sec-1_5_8_4"><span class="section-number-5">1.5.8.4</span> 冲突处理 </h5>
+<div class="outline-text-5" id="text-1_5_8_4">
+
+<p>现在comake2内部有一套默认冲突处理方式
+</p><ol>
+<li>
+如果都是4位tag的话,那么使用最新的4位版本.
+</li>
+<li>
+在指定objects和没有制定objects之间,优先选择指定objects的模块.
+</li>
+</ol>
+
+<p>比如CONFIGS('third-64/tbb',Libraries('./lib/libtbb.a'))和CONFIGS('third-64/tbb')的话,优先会选择前者.
+</p>
+<p>
+对于不能够处理的冲突,会报告冲突,产生错误然后让用户在上层就是显式地在COMAKE文件里面指定.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1_5_9" class="outline-4">
+<h4 id="sec-1_5_9"><span class="section-number-4">1.5.9</span> 更新依赖逻辑 </h4>
+<div class="outline-text-4" id="text-1_5_9">
+
+<ul>
+<li>
+如果代码在本地不存在,那么直接checkout.
+</li>
+<li>
+如果代码在本地已经存在的话.
+<ol>
+<li>
+首先svn st.如果失败的话,那么直接退出.
+</li>
+<li>
+然后直接switch.
+</li>
+</ol>
+</li>
+<li>
+如果代码在本地存在,并且强制更新的话,那么首先rm -rf删除然后重新checkout.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_5_10" class="outline-4">
+<h4 id="sec-1_5_10"><span class="section-number-4">1.5.10</span> 编译依赖逻辑 </h4>
+<div class="outline-text-4" id="text-1_5_10">
+
+<ul>
+<li>
+如果子依赖重新编译,那么需要重新编译.
+</li>
+<li>
+检查依赖模块目录下面存在.COMAKE.BUILDED.TAG文件.
+</li>
+<li>
+如果存在,并且没有任何其他文件时间比这个文件时间新,那么不进行编译.
+</li>
+<li>
+如果不存在,或者是存在其他文件时间更新,那么进行编译.
+</li>
+<li>
+如果重新编译之后,重新新建一个.COMAKE.BUILDED.TAG文件.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1_6" class="outline-3">
+<h3 id="sec-1_6"><span class="section-number-3">1.6</span> FAQ </h3>
+<div class="outline-text-3" id="text-1_6">
+
+
+</div>
+
+<div id="outline-container-1_6_1" class="outline-4">
+<h4 id="sec-1_6_1"><span class="section-number-4">1.6.1</span> LDFLAGS和LIBS差别 </h4>
+<div class="outline-text-4" id="text-1_6_1">
+
+<p>COMAKE提供了两种写法
+</p><ol>
+<li>
+LDFLAGS('-lrt -lpthread')
+</li>
+<li>
+LIBS('./libcompiler.a')
+</li>
+</ol>
+
+<p>两种方式都是提供链接参数,但是对于生成的Makefile稍有不同.假设用户的COMAKE是这样写的话
+</p>
+
+
+<pre class="src src-Python">LDFLAGS('-lrt -lpthread')
+Application('a',Sources('a.cpp'))
+</pre>
+
+
+
+<p>
+方式1会认为里面参数不是文件而仅仅是一系列未知的编译参数,所以不会做为依赖反映在Makefile里面.
+</p>
+
+
+<pre class="example">a:a.o 
+    g++ -o a a.o -lrt -lpthread
+</pre>
+
+
+
+<p>
+方式2会认为里面参数是一系列文件,所以会做为依赖反映在Makefile里面.
+</p>
+
+
+<pre class="example">a:a.o libcompiler.a
+    g++ -o a a.o libcompiler.a
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_6_2" class="outline-4">
+<h4 id="sec-1_6_2"><span class="section-number-4">1.6.2</span> 如何把conf目录下面文件发布到output下面 </h4>
+<div class="outline-text-4" id="text-1_6_2">
+
+<p>增加下面的代码到COMAKE中
+</p>
+
+
+<pre class="src src-Python">TARGET('.copy-conf',
+       ShellCommands('touch .copy-conf',
+                     'mkdir -p output/conf',
+                     'cp conf/* output/conf'),
+       CleanCommands('rm -rf output/conf'))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_6_3" class="outline-4">
+<h4 id="sec-1_6_3"><span class="section-number-4">1.6.3</span> 如何编写UnitTest的COMAKE文件 </h4>
+<div class="outline-text-4" id="text-1_6_3">
+
+
+
+
+<pre class="src src-Python">import glob
+import os
+test_source_files=glob.glob(<span style="color: #00ff00;">"*.cpp"</span>)
+for x in test_source_files:
+    root=os.path.splitext(x)[1]
+    Application(root,Sources(x))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1_6_4" class="outline-4">
+<h4 id="sec-1_6_4"><span class="section-number-4">1.6.4</span> 如果不想发布到output目录下面 </h4>
+<div class="outline-text-4" id="text-1_6_4">
+
+<p>以下面为例,我们只需要加上OutputPath('')选项即可
+</p>
+
+
+<pre class="src src-Python">Application('test',Sources('test.cpp'),OutputPath(''))
+</pre>
+
+
+</div>
+</div>
+</div>
+</div>
+<div id="postamble">
+<p class="author"> Author: 
+</p>
+<p class="date"> Date: 2011-03-10 19:44:31 CST</p>
+<p class="creator">HTML generated by org-mode 7.02 in emacs 22</p>
+</div>
+</div>
+</body>
+</html>
