@@ -19,14 +19,30 @@
 ;; list of packages to sync
 (setq pfl-packages
       '(
-        ;;auto-complete
+        anzu
+        auto-complete
+        clean-aindent-mode
+        company
+        company-c-headers
+        counsel-projectile
+        dtrt-indent
         ;;ecb
+        helm
+        helm-gtags
+        helm-projectile
+        iedit
         markdown-mode
         markdown-mode+
         ;;rainbow-delimiters
         ;;smart-tabs-mode
-        ;;xcscope
+        undo-tree
         use-package
+        volatile-highlights
+        ws-butler
+        ;;xcscope
+        yafolding
+        yasnippet
+        zygospore
         ))
 
 ;; zygospore helm-gtags helm yasnippet ws-butler volatile-highlights

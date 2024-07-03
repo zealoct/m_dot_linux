@@ -24,6 +24,13 @@
                                (setq-local compilation-read-command nil)
                                (call-interactively 'compile)))
 
+;; setup autosave directory
+(setq temporary-file-directory "$HOME/.emacs_saves")
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 ;; show column number by default
 (setq column-number-mode t)
 
