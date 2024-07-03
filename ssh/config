@@ -1,0 +1,29 @@
+Host sat0
+Hostname bb-inf-sat0.bb01
+
+Host sat4
+Hostname bb-inf-sat4.bb01
+
+Host sat5
+Hostname bb-inf-sat5.bb01
+
+Host sat6
+Hostname bb-inf-sat6.bb01
+
+Host spark00
+Hostname yf-inf-fpga-spark00.yf01
+
+Host spark01
+Hostname yf-inf-fpga-spark01.yf01
+
+Host spark02
+Hostname yf-inf-fpga-spark02.yf01
+
+Host spark03
+Hostname yf-inf-fpga-spark03.yf01
+
+Host spark04
+Hostname yf-inf-fpga-spark04.yf01
+
+Host dev147
+Hostname cp01-rdqa04-dev147.cp01
