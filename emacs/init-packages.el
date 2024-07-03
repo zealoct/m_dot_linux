@@ -28,6 +28,7 @@
         dtrt-indent
         ;;ecb
         helm
+        helm-ls-git
         helm-gtags
         helm-projectile
         iedit

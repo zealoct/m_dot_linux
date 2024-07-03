@@ -25,7 +25,7 @@
                                (call-interactively 'compile)))
 
 ;; setup autosave directory
-(setq temporary-file-directory "$HOME/.emacs_saves")
+(setq temporary-file-directory "~/.emacs_saves")
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
