@@ -55,7 +55,7 @@
   :init
   (global-company-mode 1)
   (setq company-dabbrev-downcase 0)
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 1.5)
   (setq company-backends
         '((company-files          ; files & directory
            company-keywords       ; keywords
