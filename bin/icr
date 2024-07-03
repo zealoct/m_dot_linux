@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if [[ $# -lt 1 ]]; then
-    echo Usage ${0} [remote branch]
-    exit 1
+# use given branchName, otherwise use the current branch name
+branchName=`git branch | grep '*' | awk '{print $2}'`
+if [[ $# -ge 1 ]]; then
+    branchName=${1}
 fi
 
-echo git push origin HEAD:refs/for/${1}
-git push origin HEAD:refs/for/${1}
+echo git push origin HEAD:refs/for/${branchName}
+git push origin HEAD:refs/for/${branchName}
