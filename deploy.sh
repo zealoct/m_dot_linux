@@ -15,7 +15,9 @@ cp -r $dir/bin $home/usr/
 # vim files
 mkdir -p $HOME/.vim
 cp -r $dir/dot_vim/* $HOME/.vim
-
+ln -s $HOME/.vim/vimrc $HOME/.vimrc
 
 # Install jumbo
-bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"; source ~/.bashrc
+bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"
+
+source ~/.bash_profile
