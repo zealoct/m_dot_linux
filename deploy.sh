@@ -8,6 +8,7 @@ cp $dir/bash/bashrc $HOME/.bashrc
 cp $dir/bash/bash_common $HOME/.bash_common
 cp $dir/zsh/zshrc $HOME/.zshrc
 cp $dir/tmux/tmux.conf $HOME/.tmux.conf
+cp $dir/git/gitconfig $HOME/.gitconfig
 
 # Binaries
 mkdir -p $HOME/usr

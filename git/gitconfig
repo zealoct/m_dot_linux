@@ -1,0 +1,24 @@
+[user]
+	name = hanjinchen
+	email = hanjinchen@baidu.com
+[core]
+        editor = vim
+[color]
+        status = auto
+        branch = auto
+        diff = auto
+        ui = true
+        pager = true
+[color "branch"]
+        current = normal reverse
+        local = normal
+        remote = red
+[color "diff"]
+        meta = yellow bold reverse
+        frag = magenta bold reverse
+        old = red bold
+        new = green bold
+[color "status"]
+        added = green
+        changed = red
+        untracked = cyan
