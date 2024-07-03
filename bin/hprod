@@ -11,8 +11,9 @@ Hanjinchen PRODuction helper
 
 usage: hprod <command> <module name> [<module version]
 commands
-    fetch   fetch specific version of production of the given module
-    list    list given module's available tags
+    fetch      fetch specific version of production of the given module
+    list       list given module's available tags
+    develop    get the output the given module from spark00
 arguments
     <module name>     module path related to /baidu directory
     <module version>  module versoin string, no prefix and surfix needed
@@ -21,6 +22,7 @@ example
         5-0-0-1
         5-0-1-1
     % hprod fetch fpga-ai/api 5-0-1-1\
+    % hprod develop fpga-ai/api
 """
 
 def print_usage():
@@ -61,6 +63,18 @@ def command_list(args):
         if m:
             print m.group(1)
 
+def command_develop(args):
+    if len(args) < 3:
+        print_usage()
+        return
+    module_path = args[2].strip('/')
+    module_name = module_path[module_path.rfind('/') + 1:]
+    spark00_path = '~/icode/baidu/%s/output' % (module_path)
+    print "fetching %s on spark00" % (spark00_path)
+    subprocess.call(['scp', '-r',
+                     'yf-inf-fpga-spark00.yf01:%s' % (spark00_path),
+                     './'])
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print_usage()
@@ -68,5 +82,7 @@ if __name__ == '__main__':
         command_fetch(sys.argv)
     elif sys.argv[1] == 'list':
         command_list(sys.argv)
+    elif sys.argv[1] == 'develop':
+        command_develop(sys.argv)
     else:
         print_usage()
