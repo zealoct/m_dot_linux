@@ -1,0 +1,36 @@
+#! /bin/bash 
+
+#test the input
+if [ "$1" = "" ] || [ "$2" = "" ] || [ ! -e $2 ] ; then
+	echo "Error, format: cmd <dest.apk> <src-dir>"
+	exit
+fi
+
+#init variable
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#begin orgnize
+tmpdir="${DIR}/tmp-dir"
+mkdir $tmpdir 
+cp $2/* $tmpdir -r
+if [ ! -e "$tmpdir/src" ] ; then
+	echo src is not exist!
+	rm $tmpdir -r
+	exit
+fi
+./smali -o $tmpdir/classes.dex $tmpdir/src 
+rm $tmpdir/src -r
+#Now we have tmpdir with the correct layout
+
+#creat apk
+tmpapk="${DIR}/tmp.apk"
+cd $tmpdir 
+zip -r $tmpapk *
+
+#sign the apk
+expect -f $DIR/expect.exp "${DIR}/sign/stan.keystore" $1 $tmpapk
+#jarsigner -verbose -keystore "${DIR}/sign/stan.keystore" -signedjar $1 $tmpapk stan.keystore
+
+#clear all the tmp files
+rm $tmpdir -r
+rm $tmpapk

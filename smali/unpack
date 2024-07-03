@@ -1,0 +1,24 @@
+#! /bin/bash 
+
+if [ "$1" = "" ] || [ "$2" = "" ] || [ ! -e $1 ] ; then
+	echo "Error: format cmd <src.apk> <dest-dir>"
+	exit
+fi
+
+#init variables
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ ! -e $2 ]; then
+	mkdir $2
+fi
+
+#create the unpack DIR
+tmpzip="${DIR}/tmp.zip"
+cp $1 $tmpzip
+unzip $tmpzip -d $2
+rm $tmpzip
+
+#de-assembly the code in .dex
+mkdir $2/src
+$DIR/baksmali -b -o $2/src $2/classes.dex
+

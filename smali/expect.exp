@@ -1,0 +1,6 @@
+set arg0 [lindex $argv 0]
+set arg1 [lindex $argv 1]
+set arg2 [lindex $argv 2]
+spawn jarsigner -verbose -keystore ${arg0} -signedjar ${arg1} ${arg2} stan.keystore
+expect "*keystore:*" { send "ppi123\n" }
+expect eof
