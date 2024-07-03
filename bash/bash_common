@@ -48,6 +48,7 @@ alias gcmt!='git commit --amend'
 alias gcmtm='git commit -m'
 alias gmg='git merge'
 alias grb='git rebase'
+alias gtg='git tag --format="%(align:26,left) %(color:bold red) %(refname:strip=2)%(end) %(color:yellow)--> %(color:reset)%(subject)"'
 # tmux
 alias tmux="tmux -S /tmp/tmux-hanjinchen -2" # make tmux support 256-color
 alias ta='tmux attach -d -t'
