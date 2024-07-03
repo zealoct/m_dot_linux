@@ -7,6 +7,7 @@ MODULES = {
     'aidrv' : 'yf-inf-fpga-spark00.yf01:/home/hanjinchen/icode/baidu/fpga-ai/driver/output',
     'aiapi' : 'cp01-rdqa04-dev147.cp01:/home/users/hanjinchen/icode/baidu/fpga-ai/api/output',
     'deploytools' : 'cp01-rdqa04-dev147.cp01:/home/users/hanjinchen/icode/baidu/fpga-ai/deploy-tools/output',
+    'legodeploy' : 'cp01-rdqa04-dev147.cp01:/home/users/hanjinchen/icode/baidu/fpga-lego/deployment/output',
 }
 PRODUCTS = {
     'fpga-ai/driver' : 'wget -r -nH --level=0 --cut-dirs=7 getprod@product.scm.baidu.com:/data/prod-64/baidu/fpga-ai/driver/driver_3-3-1-1_PD_BL/ --user getprod --password getprod --preserve-permissions',
