@@ -11,3 +11,4 @@
 [[ -f "$HOME/.bash_common" ]] && source "$HOME/.bash_common"
 
 export PS1="\033[m\033[47m\A \u@\h \w\033[0m\n$ "
+[[ -s "/home/hanjinchen/.jumbo/etc/bashrc" ]] && source "/home/hanjinchen/.jumbo/etc/bashrc"

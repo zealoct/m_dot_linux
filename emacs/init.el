@@ -24,6 +24,7 @@
 (require 'setup-cedet)
 (require 'setup-editing)
 (require 'setup-c)
+(require 'protobuf-mode)
 
 (require 'sr-speedbar)
 (setq speedbar-use-images nil)
