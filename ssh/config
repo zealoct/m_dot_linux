@@ -28,5 +28,26 @@ Hostname yf-inf-fpga-spark04.yf01
 Host dev147
 Hostname cp01-rdqa04-dev147.cp01
 
+Host storage0
+Hostname bb-mco-cloud-storage020141114175331-04.bb01
+
 Host storage1
 Hostname bb-mco-cloud-storage1.bb01
+
+Host storage2
+Hostname bb-mco-cloud-storage2.bb01
+
+Host storage3
+Hostname bb-mco-cloud-storage3.bb01
+
+Host isa0
+Hostname st01-inf-isa0.st01.baidu.com
+
+Host isa1
+Hostname st01-inf-isa1.st01.baidu.com
+
+Host isa2
+Hostname st01-inf-isa2.st01.baidu.com
+
+Host isa3
+Hostname st01-inf-isa3.st01.baidu.com
