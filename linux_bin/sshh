@@ -4,12 +4,7 @@ import os
 import sys
 
 ALIAS = {
-        'sat0' : 'bb-inf-sat0.bb01',
-        'sat4' : 'bb-inf-sat4.bb01',
-        'sat5' : 'bb-inf-sat5.bb01',
-        'sat6' : 'bb-inf-sat6.bb01',
-        'spark00' : 'yf-inf-fpga-spark00.yf01',
-        'dev147' : 'cp01-rdqa04-dev147.cp01',
+        'alias0' : 'hostname0',
 }
 
 def print_usage():

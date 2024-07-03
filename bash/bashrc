@@ -19,6 +19,4 @@ case $TERM in
     ;;
 esac
 
-[[ -s "$HOME/.jumbo/etc/bashrc" ]] && source "$HOME/.jumbo/etc/bashrc"
-[[ -s "$HOME/.deck/etc/bashrc" ]]  && source "$HOME/.deck/etc/bashrc"
-[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+unset TMOUT

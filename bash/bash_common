@@ -61,20 +61,13 @@ alias tmux="tmux -S /tmp/tmux-hanjinchen -2" # make tmux support 256-color
 alias ta='tmux attach -d -t'
 alias tls='tmux ls'
 
-alias rtpull='rsync -az rsync://hanjinchen@bjhw-sys-rpm0224.bjhw.baidu.com:8873/hjcrt-ro ./'
-alias rtpush='rsync -az ./ rsync://hanjinchen@bjhw-sys-rpm0224.bjhw.baidu.com:8873/hjcrt'
-
 # PATH setup
 PATH=/sbin:/bin:$PATH
 PATH=$HOME/usr/bin:$PATH
 PATH=$HOME/usr/bin/gcc:$PATH
-PATH=$HOME/usr/bin/ccover/bin:$PATH
-PATH=$HOME/.BCloud/bin:$PATH
-PATH=$HOME/scmtool/usr/bin:$PATH
-PATH=$HOME/.cargo/bin:$PATH
 export PATH
 
-export LD_LIBRARY_PATH=$HOME/usr/lib:$HOME/.jumbo/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
 
 unset LS_COLORS
 unset TMOUT

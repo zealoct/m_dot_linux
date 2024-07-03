@@ -15,7 +15,12 @@ mkdir -p $HOME/.mzsh && cp -r $dir/zsh/zsh-git-prompt $HOME/.mzsh/
 
 # Binaries
 mkdir -p $HOME/usr
-ln -s $dir/bin $HOME/usr
+
+if [[ $(uname) == "Darwin" ]]; then
+    ln -s $dir/mac_bin $HOME/usr
+else
+    ln -s $dir/linux_bin $HOME/usr
+fi
 
 # vim files
 rm -rf $HOME/.vim
@@ -26,10 +31,7 @@ ln -s $HOME/.vim/vimrc $HOME/.vimrc
 ln -s $dir/emacs $HOME/.emacs.d
 
 # ssh host alias
-cp $dir/ssh/config $HOME/.ssh/
-chmod 644 $HOME/.ssh/config
-
-# Install jumbo
-# bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"
+#cp $dir/ssh/config $HOME/.ssh/
+#chmod 644 $HOME/.ssh/config
 
 source ~/.bash_profile
