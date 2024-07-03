@@ -9,6 +9,8 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 # menu completion
 zstyle ':completion:*' menu select=1
 
+source $HOME/.mzsh/zsh-git-prompt/zshrc.sh
+
 autoload -U compinit promptinit colors
 compinit
 promptinit
@@ -38,12 +40,12 @@ case $TERM in
         function sctitle() { print -Pn "\ek$1\e\\"}
         function precmd() { sctitle "%20<..<%~%<<" }
         function preexec() { sctitle "%20>..>$1%<<" }
-        export PROMPT="%{$bg[cyan]$fg_bold[blue]%}%D{%H:%M}%{$reset_color%}%{$bg[white]$fg[black]%} %~ %{$reset_color%}
-%{$fg[blue]%}%#%{$reset_color%} "
+        export PROMPT='%{$bg[cyan]$fg_bold[blue]%}%D{%H:%M}%{$reset_color%}%{$bg[white]$fg[black]%} %~ %{$reset_color%}$(git_super_status)
+%{$fg[blue]%}%#%{$reset_color%} '
     ;;
     *)
-        export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%~]%{$reset_color%}
-%{$fg[cyan]%}%#%{$reset_color%} "
+        export PROMPT='%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%~]%{$reset_color%}$(git_super_status)
+%{$fg[cyan]%}%#%{$reset_color%} '
     ;;
 esac
 

@@ -10,6 +10,8 @@ cp $dir/zsh/zshrc $HOME/.zshrc
 cp $dir/tmux/tmux.conf $HOME/.tmux.conf
 cp $dir/git/gitconfig $HOME/.gitconfig
 
+mkdir -p $HOME/.mzsh && cp -r $dir/zsh/zsh-git-prompt $HOME/.mzsh/
+
 # Binaries
 mkdir -p $HOME/usr
 cp -r $dir/bin $HOME/usr/
