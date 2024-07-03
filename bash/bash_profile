@@ -6,11 +6,13 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
+PATH=/sbin:/bin:$PATH
+PATH=$HOME/usr/bin/ccover/bin:$PATH
+PATH=$HOME/.BCloud/bin:$PATH
+PATH=$HOME/scmtool/usr/bin:$PATH
+PATH=$HOME/.jumbo/bin:$PATH
 
-PATH=$HOME/usr/bin/:/sbin:/bin:$PATH
-export PATH
-
-LD_LIBRARY_PATH=$HOME/usr/lib:$HOME/.jumbo/lib:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$HOME/.jumbo/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH
 
 PATH=$HOME/.BCloud/bin:$PATH

@@ -25,6 +25,10 @@ ln -s $HOME/.vim/vimrc $HOME/.vimrc
 # emacs
 ln -s $dir/emacs $HOME/.emacs.d
 
+# ssh host alias
+cp $dir/ssh/config $HOME/.ssh/
+chmod 644 $HOME/.ssh/config
+
 # Install jumbo
 bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"
 
