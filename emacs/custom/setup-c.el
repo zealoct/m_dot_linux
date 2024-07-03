@@ -10,12 +10,18 @@
 ;;
 (add-hook 'c-mode-common-hook
           (lambda ()
+            (message "c-mode-hooked")
+            (setq tab-width 2)
+            (setq c-basic-offset tab-width)
+            (setq indent-tabs-mode nil)
             (c-set-offset 'arglist-intro '++)
-            (c-set-offset 'arglist-cont '++)
+            (c-set-offset 'arglist-cont '0)
             (c-set-offset 'arglist-close 0)
             (c-set-offset 'innamespace 0)
             (c-set-offset 'namespace-open 0)
-            (c-set-offset 'namespace-close 0)))
+            (c-set-offset 'namespace-close 0)
+            (setq whitespace-line-column 100)
+            (whitespace-mode t)))
 
 ;; Available C style:
 ;; “gnu”: The default style for GNU projects
@@ -28,7 +34,7 @@
 ;; “python”: What Python developers use for extension modules
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
-(setq c-default-style) "linux" ;; set style to "linux"
+;; (setq c-default-style) "linux" ;; set style to "linux"
 
 (use-package cc-mode
   :init

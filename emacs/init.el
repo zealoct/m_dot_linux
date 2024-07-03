@@ -23,15 +23,20 @@
 ;; (require 'setup-ggtags)
 (require 'setup-cedet)
 (require 'setup-editing)
+(require 'setup-c)
+
+(require 'sr-speedbar)
+(setq speedbar-use-images nil)
+(sr-speedbar-refresh-turn-off)
 
 ;; backspace key
-(global-set-key (kbd "C-?") 'help-command)
-(global-set-key (kbd "C-h") 'delete-backward-char)
-(global-set-key (kbd "M-h") 'backward-kill-word)
+;; (global-set-key (kbd "C-?") 'help-command)
+;; (global-set-key (kbd "C-h") 'delete-backward-char)
+;; (global-set-key (kbd "M-h") 'backward-kill-word)
+;; (global-set-key (kbd "M-s M-f") 'speedbar-get-focus)
 
 ;; load customized theme
 (load-theme 'zea t)
-
 
 ;; function-args
 ;; (require 'function-args)

@@ -55,19 +55,19 @@
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
 
-  ; automatically indent when press RET
+;; automatically indent when press RET
 
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (windmove-default-keybindings)
 
-(provide 'setup-general)
-
 ;; whitespace
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 100)
-(global-whitespace-mode t)
+;;(setq whitespace-line-column 100)
+;;(global-whitespace-mode nil)
 
 ;; automatically show paren
 (show-paren-mode 1)
+
+(provide 'setup-general)
