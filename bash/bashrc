@@ -3,7 +3,6 @@
 #
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
-[[ -s "/home/hanjinchen/.jumbo/etc/bashrc" ]] && source "/home/hanjinchen/.jumbo/etc/bashrc"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -23,9 +22,3 @@ alias glogo='git log --pretty=oneline'
 alias glogs='git log --pretty=short'
 alias ta='tmux attach -d -t'
 alias tls='tmux ls'
-
-PATH=$PATH:~/usr/bin/
-export PATh
-
-LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH

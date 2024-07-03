@@ -1,4 +1,14 @@
+# .bash_profile
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function* 
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc 
+# User specific environment and startup programs
+
+PATH=$HOME/usr/bin/:/sbin:/bin:$PATH
+export PATH
+
+LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
