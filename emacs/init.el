@@ -20,11 +20,11 @@
     (require 'setup-ivy-counsel)
   (require 'setup-helm)
   (require 'setup-helm-gtags))
-;; (require 'setup-ggtags)
 (require 'setup-cedet)
 (require 'setup-editing)
 (require 'setup-c)
 
+(require 'taglist)
 (require 'sr-speedbar)
 (setq speedbar-use-images nil)
 (sr-speedbar-refresh-turn-off)
@@ -37,6 +37,10 @@
 
 ;; load customized theme
 (load-theme 'zea t)
+
+(add-to-list 'default-frame-alist '(width  . 90))
+(add-to-list 'default-frame-alist '(height . 40))
+
 
 ;; function-args
 ;; (require 'function-args)
@@ -53,9 +57,7 @@
     ("ba97e528aa6525b5fb4d9aca64c72eaad024fcc587619e0778bcce3530420de6" default)))
  '(package-selected-packages
    (quote
-    (zygospore helm-gtags helm yasnippet ws-butler volatile-highlights
-               use-package undo-tree iedit dtrt-indent counsel-projectile
-               company clean-aindent-mode anzu))))
+    (zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

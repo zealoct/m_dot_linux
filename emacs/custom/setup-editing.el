@@ -66,8 +66,9 @@
 ;; Package: dtrt-indent
 (use-package dtrt-indent
   :init
-  (dtrt-indent-mode 1)
-  (setq dtrt-indent-verbosity 0))
+  (setq dtrt-indent-verbosity 0)
+  :config
+  (dtrt-indent-mode 1))
 
 ;; Package: ws-butler
 (use-package ws-butler
