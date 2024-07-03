@@ -68,7 +68,7 @@ case $TERM in
         function sctitle() { print -Pn "\ek$1\e\\"}
         function precmd() { sctitle "%20<..<%~%<<" }
         function preexec() { sctitle "%20>..>$1%<<" }
-        export PROMPT="%{$bg[white]$fg[black]%}[%D{%H:%M} %~]%{$reset_color%}
+        export PROMPT="%{$bg[cyan]$fg[white]%}%D{%H:%M}%{$bg[white]$fg[black]%} %~ %{$reset_color%}
 %{$fg[cyan]%}%#%{$reset_color%} "
     ;;
     *)
