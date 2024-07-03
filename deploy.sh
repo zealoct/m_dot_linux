@@ -30,6 +30,6 @@ cp $dir/ssh/config $HOME/.ssh/
 chmod 644 $HOME/.ssh/config
 
 # Install jumbo
-bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"
+# bash -c "$( curl http://jumbo.baidu.com/install_jumbo.sh )"
 
 source ~/.bash_profile
