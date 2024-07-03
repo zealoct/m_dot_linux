@@ -1,10 +1,12 @@
 ;; this variables must be set before load helm-gtags
 ;; you can change to any prefix key of your choice
 (setq helm-gtags-prefix-key "\C-cg")
-
+(message "hello from setup-help-gtags 1")
 (use-package helm-gtags
   :init
   (progn
+    (message "hello from setup-help-gtags")
+
     (setq helm-gtags-ignore-case t
           helm-gtags-auto-update t
           helm-gtags-use-input-at-cursor t

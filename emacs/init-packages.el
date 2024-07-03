@@ -7,26 +7,35 @@
 ;; set up ELPA and MELPA repositories
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("org" . "http://orgmode.org/elpa/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
+(package-initialize)
+
 ;; list of packages to sync
 (setq pfl-packages
       '(
-        auto-complete
-        ecb
+        ;;auto-complete
+        ;;ecb
         markdown-mode
         markdown-mode+
-        rainbow-delimiters
-        smart-tabs-mode
-        xcscope
+        ;;rainbow-delimiters
+        ;;smart-tabs-mode
+        ;;xcscope
+        use-package
         ))
 
-(package-initialize)
+;; zygospore helm-gtags helm yasnippet ws-butler volatile-highlights
+;; use-package undo-tree iedit dtrt-indent counsel-projectile
+;; company clean-aindent-mode anzu
+
+
+;; (unless (package-installed-p 'use-package)
+;;   (package-install 'use-package))
 
 ;; refresh package list if it is not already available
 (when (not package-archive-contents) (package-refresh-contents))

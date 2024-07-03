@@ -10,6 +10,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias vi="vim"
 alias svi='sudo vi'
+alias emacs="TERM=xterm-256color emacs"
 alias em="emacs"
 alias scat='sudo cat'
 alias sfind='sudo find'

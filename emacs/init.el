@@ -1,17 +1,4 @@
-(require 'package)
-(add-to-list 'package-archives
-         '("melpa" . "http://melpa.org/packages/") t)
-
-(package-initialize)
-
-(when (not package-archive-contents)
-    (package-refresh-contents))
-
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
+(load "~/.emacs.d/init-packages")
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
@@ -25,6 +12,8 @@
 (require 'setup-editing)
 (require 'setup-c)
 (require 'protobuf-mode)
+(require 'setup-helm)
+(require 'setup-helm-gtags)
 
 (require 'sr-speedbar)
 (setq speedbar-use-images nil)

@@ -3,25 +3,40 @@
   :init
   (add-to-list 'company-backends 'company-c-headers))
 
-;; hs-minor-mode for folding source code
-(add-hook 'c-mode-common-hook 'hs-minor-mode)
+(use-package cc-mode
+  :init
+  (define-key c-mode-map  [(tab)] 'company-complete)
+  (define-key c++-mode-map  [(tab)] 'company-complete)
 
-;; Intent Settings
-;;
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (message "c-mode-hooked")
-            (setq tab-width 4)
-            (setq c-basic-offset tab-width)
-            (setq indent-tabs-mode nil)
-            (c-set-offset 'arglist-intro '++)
-            (c-set-offset 'arglist-cont '0)
-            (c-set-offset 'arglist-close 0)
-            (c-set-offset 'innamespace 0)
-            (c-set-offset 'namespace-open 0)
-            (c-set-offset 'namespace-close 0)
-            (setq whitespace-line-column 100)
-            (whitespace-mode t)))
+  ;; hs-minor-mode for folding source code
+  (add-hook 'c-mode-common-hook 'hs-minor-mode)
+
+  ;; Intent Settings
+  ;;
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (message "c-mode-hooked")
+              (setq tab-width 4)
+              (setq c-basic-offset tab-width)
+              (setq indent-tabs-mode nil)
+              (c-set-offset 'arglist-intro '++)
+              (c-set-offset 'arglist-cont '0)
+              (c-set-offset 'arglist-cont-nonempty '(c-lineup-argcont
+                                                     c-lineup-gcc-asm-reg
+                                                     c-lineup-arglist))
+              (c-set-offset 'arglist-close 0)
+              (c-set-offset 'innamespace 0)
+              (c-set-offset 'namespace-open 0)
+              (c-set-offset 'namespace-close 0)
+              (c-set-offset 'statement-cont '(c-lineup-string-cont
+                                              c-lineup-cascaded-calls
+                                              c-lineup-math))
+              (c-set-offset 'brace-list-intro '+)
+              (setq whitespace-line-column 100)
+              (whitespace-mode t)
+              )
+            )
+  )
 
 ;; Available C style:
 ;; “gnu”: The default style for GNU projects
@@ -36,9 +51,5 @@
 ;; “user”: When you want to define your own style
 ;; (setq c-default-style) "linux" ;; set style to "linux"
 
-(use-package cc-mode
-  :init
-  (define-key c-mode-map  [(tab)] 'company-complete)
-  (define-key c++-mode-map  [(tab)] 'company-complete))
 
 (provide 'setup-c)

@@ -3,11 +3,12 @@
   (progn
     (require 'helm-config)
     (require 'helm-grep)
+    (require 'helm-lib)
     ;; To fix error at compile:
     ;; Error (bytecomp): Forgot to expand macro with-helm-buffer in
     ;; (with-helm-buffer helm-echo-input-in-header-line)
-    (if (version< "26.0.50" emacs-version)
-        (eval-when-compile (require 'helm-lib)))
+    ;; (if (version< "26.0.50" emacs-version)
+    ;;     (eval-when-compile (require 'helm-lib)))
 
     (defun helm-hide-minibuffer-maybe ()
       (when (with-helm-buffer helm-echo-input-in-header-line)
@@ -77,8 +78,6 @@
     (global-set-key (kbd "C-c r") 'helm-recentf)
     (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
     (global-set-key (kbd "C-c h o") 'helm-occur)
-    (global-set-key (kbd "C-c h o") 'helm-occur)
-
     (global-set-key (kbd "C-c h w") 'helm-wikipedia-suggest)
     (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 
