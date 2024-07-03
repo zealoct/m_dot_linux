@@ -1,5 +1,4 @@
 set fileencodings=utf-8,gbk "ucs-bom
-set enc=utf-8
 
 set bs=indent,eol,start " all backspacing over everthing in insert mode
 set ruler " show the cursor position all the time
@@ -38,6 +37,25 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" setup back and swap directory
+let data_dir = $HOME.'/.vimdata/'
+let backup_dir = data_dir . 'backup'
+let swap_dir = data_dir . 'swap'
+if finddir(data_dir) == ''
+    silent call mkdir(data_dir)
+endif
+if finddir(backup_dir) == ''
+    silent call mkdir(backup_dir)
+endif
+if finddir(swap_dir) == ''
+    silent call mkdir(swap_dir)
+endif
+set backupdir=$HOME/.vimdata/backup " where to put backup file
+set directory=$HOME/.vimdata/swap   " where to put swap file
+unlet data_dir
+unlet backup_dir
+unlet swap_dir
 
 """ Cscope """
 if has("cscope") && filereadable("/usr/bin/cscope")
