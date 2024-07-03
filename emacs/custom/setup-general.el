@@ -69,18 +69,24 @@
           (company-capf company-abbrev company-dabbrev)
           )))
 
-(use-package company-c-headers :ensure t)
+(use-package company-c-headers
+  :ensure t)
 ;;(use-package company-clang :ensure t)
 
 ;; (define-key c-mode-map  [(control tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(control tab)] 'company-complete)
 
+(use-package swiper
+  :ensure t)
+
 ;; Package: projejctile
 (use-package projectile
   :ensure t
-  :init
-  (projectile-global-mode)
-  (setq projectile-enable-caching t))
+  :config
+  (projectile-mode)
+  (setq projectile-enable-caching t)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
 
 ;; Package zygospore
 (use-package zygospore
@@ -95,9 +101,12 @@
 (windmove-default-keybindings)
 
 ;; whitespace
-(require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(setq whitespace-line-column 100)
+(use-package whitespace
+  :ensure t
+  :config
+  (setq whitespace-style '(face empty tabs lines-tail trailing))
+  (setq whitespace-line-column 100))
+
 ;;(global-whitespace-mode nil)
 
 ;; automatically show paren

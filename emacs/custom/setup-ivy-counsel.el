@@ -6,7 +6,8 @@
 ;;    (global-set-key (kbd "C-c s") 'swiper))
 ;;  )
 
-(use-package ivy :ensure t
+(use-package ivy
+  :ensure t
   :diminish (ivy-mode . "")
   :bind
   (:map ivy-mode-map
@@ -36,8 +37,6 @@
 ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
 ;;(ivy-posframe-mode 1)
 
-(use-package swiper :ensure t)
-
 (use-package counsel
   :ensure t
   :bind
@@ -54,6 +53,9 @@
   :bind-keymap ("C-c g" . counsel-gtags-command-map)
   :bind (("C-]" . counsel-gtags-find-dwin)
          ("C-t" . counsel-gtags-go-backward)
+         ;;("C-c g d" . counsel-gtags-find-definition)
+         ;;("C-c g r" . counsel-gtags-find-reference)
+         ;;("C-c g u" . counsel-gtags-update-tags)
          )
   :config
   (counsel-gtags-mode 1)
@@ -69,16 +71,17 @@
 ;;   ("C-c g u" . counsel-gtags-update-tags)
 ;;   ))
 
-(use-package counsel-projectile
-  :ensure t
-  :init
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  ;;(setq counsel-projectile-key-bindings "C-c p")
-  :bind  (("C-x C-b" . counsel-projectile)
-          ("C-x c p" . counsel-projectile-ag)
-          )
+(use-package counsel-projectile :ensure t
+  :init (use-package ag :ensure t)
+
   :config
   (counsel-projectile-mode)
+  (setq counsel-projectile-ag-initial-input `(ivy-thing-at-point))
+
+  :bind
+  (("C-x C-b" . counsel-projectile)
+   ("C-c h p" . counsel-projectile-ag)
+   )
   )
 
 ;;(setq ivy-re-builders-alist

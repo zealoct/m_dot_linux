@@ -1,4 +1,4 @@
-(use-package helm
+(use-package helm :ensure t
   :init
   (progn
     (require 'helm-config)
@@ -133,14 +133,14 @@
 
     (helm-mode 1)
 
-    (use-package swiper
+    (use-package swiper :ensure t
       ;;:bind (("C-c s" . swiper))
       )
 
-    (use-package swiper-helm
+    (use-package swiper-helm :ensure t
       :bind (("C-c s" . swiper-helm)))
 
-    (use-package helm-projectile
+    (use-package helm-projectile :ensure t
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
@@ -148,7 +148,7 @@
       :bind ("C-x C-b" . helm-projectile)
       )
 
-    (use-package helm-ag
+    (use-package helm-ag :ensure t
       :init
       (setq helm-ag-insert-at-point 'symbol)
       :bind ("C-c h p" . helm-projectile-ag)

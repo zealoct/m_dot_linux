@@ -44,7 +44,7 @@
         volatile-highlights
         ws-butler
         ;;xcscope
-        yafolding
+        ;;yafolding
         yasnippet
         ;;zygospore
         ))
