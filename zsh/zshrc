@@ -1,3 +1,5 @@
+[[ -s "/home/users/hanjinchen/.jumbo/etc/bashrc" ]] && source "/home/users/hanjinchen/.jumbo/etc/bashrc"
+
 alias l='ls'
 
 # color code completion!!!!  Wohoo!
@@ -11,7 +13,7 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 # menu completion
 zstyle ':completion:*' menu select=1
 
-autoload -Uz compinit promptinit colors
+autoload -U compinit promptinit colors
 compinit
 promptinit
 #zsh-mime-setup
@@ -25,8 +27,8 @@ alias du="du -mh --max-depth=1"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias rm='rm -i'
-alias sc='screen '
-alias sr='screen '
+# alias sc='screen '
+# alias sr='screen '
 alias man='LANG=C man'
 #alias gvi='gvim -font "Courier 10 Pitch 14"'
 export BREAK_CHARS="\"#'(),;\|!?[]{}"
@@ -35,7 +37,7 @@ alias sbcl="rlwrap -b \$BREAK_CHARS sbcl"
 alias vi="vim"
 alias svi="sudo vi"
 alias scat="sudo cat"
-alias find="sudo find"
+#alias find="sudo find"
 alias paci="sudo pacman -Sy"
 alias pacs="pacman -Ss"
 alias sudo="sudo "
@@ -47,10 +49,11 @@ alias glogo='git log --pretty=format:"%C(yellow)%h %Cblue%cn %Cred%s"'
 alias glogs='git log --pretty=short'
 alias gstt="git status"
 # tmux
+alias tmux="tmux -2" # make tmux support 256-color
 alias ta="tmux attach -d -t"
 alias tls="tmux list-sessions"
 
-export EDITOR=vim 
+export EDITOR=vim
 
 alias -g ..='..'
 alias -g ...='../../'
@@ -65,21 +68,67 @@ case $TERM in
         function sctitle() { print -Pn "\ek$1\e\\"}
         function precmd() { sctitle "%20<..<%~%<<" }
         function preexec() { sctitle "%20>..>$1%<<" }
-        export PS1="%{${fg[green]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+        export PROMPT="%{$bg[white]$fg[black]%}[%D{%H:%M} %~]%{$reset_color%}
+%{$fg[cyan]%}%#%{$reset_color%} "
     ;;
     *)
-        export PS1="%{${fg[green]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+        export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%~]%{$reset_color%}
+%{$fg[cyan]%}%#%{$reset_color%} "
     ;;
 esac
 
-# proxy setup 
-http_proxy=http://10.131.251.46:8000/
-export http_proxy 
-https_proxy=https://10.131.251.46:8000/
-export https_proxy 
+bindkey -e # Emacs key bindings
 
-#PATH=/opt/android-sdk-linux_x86/platform-tools/:/opt/jdk1.5.0_22/bin/:/var/lib/gems/1.8/bin/:$PATH
-PATH=/opt/jdk1.6.0_31/bin:$PATH
+# Function key bindings for xterm
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[2~' quoted-insert
+bindkey '\e[3~' delete-char
+bindkey '\e[4~' end-of-line
+bindkey '\e[5~' beginning-of-history
+bindkey '\e[6~' end-of-history
+
+## proxy setup
+# http_proxy=http://10.131.251.46:8000/
+# export http_proxy
+# https_proxy=https://10.131.251.46:8000/
+# export https_proxy
+
+## PATH setup
+# PATH=/opt/android-sdk-linux_x86/platform-tools/:/opt/jdk1.5.0_22/bin/:/var/lib/gems/1.8/bin/:$PATH
+# PATH=/opt/jdk1.6.0_31/bin:$PATH
+PATH=$HOME/software/opt/gcc46/bin:$PATH
+PATH=$HOME/software/bin:$PATH
+PATH=$HOME/.jumbo/bin:$PATH
+PATH=$HOME/bin:$PATH
+PATH=$HOME/bin/ccover/bin:$PATH
 export PATH
 
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export LD_LIBRARY_PATH=$HOME/software/lib:$LD_LIBRARY_PATH
+
+###############Please don't modify this section, or errors will occur!###############
+#BTEST_FLAG_START
+export BTEST_WORK_ROOT=/home/users/hanjinchen/work/svn_root//
+export BTEST_HOME=/home/users/hanjinchen/btest
+export GTEST_HOME=/home/users/hanjinchen/work/svn_root///com/btest/gtest/output
+export LD_LIBRARY_PATH=$GTEST_HOME/lib:$LD_LIBRARY_PATH
+export PATH=$BTEST_HOME/bin:$PATH
+#BTEST_FLAG_END
+###############Please don't modify this section, or errors will occur!###############
+### BEGIN-ERRHUNTER-PATH please don't manualy change this format!! Or it will cause failure!
+export ERRHUNTER_HOME=/home/users/hanjinchen/btest/errHunter
+export PATH=$ERRHUNTER_HOME:$PATH
+export LD_LIBRARY_PATH=$ERRHUNTER_HOME/lib/:$LD_LIBRARY_PATH
+### END-ERRHUNTER-PATH #################
+export ERRHUNTER_UPDATE_DATE=05/13/15
+
+#CODE STYLE
+export PYTHONIOENCODING=GBK
+
+
+## CCOVER
+export COVFILE=$PWD/test.cov
+
+## Set this in ocean
+export MAIL=
