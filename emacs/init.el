@@ -36,8 +36,6 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (c-set-offset 'arglist-intro '++)
-            (c-set-offset 'arglist-cont-nonempty
-                          (c-lineup-gcc-asm-reg c-lineup-arglist))
             (c-set-offset 'arglist-cont '++)
             (c-set-offset 'arglist-close 0)
             (c-set-offset 'innamespace 0)

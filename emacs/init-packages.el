@@ -18,6 +18,7 @@
 (setq pfl-packages
       '(
         auto-complete
+        ecb
         markdown-mode
         markdown-mode+
         rainbow-delimiters
