@@ -1,0 +1,36 @@
+#!/bin/env python
+
+import os
+import sys
+
+ALIAS = {
+        'sat0' : 'bb-inf-sat0.bb01',
+        'sat4' : 'bb-inf-sat4.bb01',
+        'sat5' : 'bb-inf-sat5.bb01',
+        'sat6' : 'bb-inf-sat6.bb01',
+        'spark00' : 'yf-inf-fpga-spark00.yf01',
+        'dev147' : 'cp01-rdqa04-dev147.cp01',
+}
+
+def print_usage():
+    print "USAGE\n" \
+          "    $0 [-l] <hostname or alias>\n" \
+          "OPTIONS\n" \
+          "    -l  list hostname alias"
+
+def list_alias():
+    print "%-10s %s" % ('ALIAS', 'HOSTNAME')
+    for k, v in ALIAS.items():
+        print "%-10s %s" % (k, v)
+
+def connect(key):
+    hostname = ALIAS.has_key(key) and ALIAS[key] or key
+    os.system("ssh %s"%(hostname))
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print_usage()
+    elif sys.argv[1] == '-l':
+        list_alias()
+    else:
+        connect(sys.argv[1])
