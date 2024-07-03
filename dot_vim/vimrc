@@ -42,6 +42,7 @@ nmap <C-l> <C-w>l
 let data_dir = $HOME.'/.vimdata/'
 let backup_dir = data_dir . 'backup'
 let swap_dir = data_dir . 'swap'
+let undo_dir = data_dir . 'undo'
 if finddir(data_dir) == ''
     silent call mkdir(data_dir)
 endif
@@ -51,11 +52,16 @@ endif
 if finddir(swap_dir) == ''
     silent call mkdir(swap_dir)
 endif
+if finddir(undo_dir) == ''
+    silent call mkdir(undo_dir)
+endif
 set backupdir=$HOME/.vimdata/backup " where to put backup file
 set directory=$HOME/.vimdata/swap   " where to put swap file
+set undodir=$HOME/.vimdata/undo
 unlet data_dir
 unlet backup_dir
 unlet swap_dir
+unlet undo_dir
 
 """ Cscope """
 if has("cscope") && filereadable("/usr/bin/cscope")
@@ -93,7 +99,8 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 " Remove trailing white spaces at save
-autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * silent! %s/\s\+$//
+"autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * silent! %s/\s\+$//
+command Trim silent! %s/\s\+$//
 
 " Highlight the 100th column
 set cc=100
