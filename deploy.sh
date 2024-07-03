@@ -17,9 +17,9 @@ mkdir -p $HOME/.mzsh && cp -r $dir/zsh/zsh-git-prompt $HOME/.mzsh/
 mkdir -p $HOME/usr
 
 if [[ $(uname) == "Darwin" ]]; then
-    ln -s $dir/mac_bin $HOME/usr
+    ln -s $dir/mac_bin $HOME/usr/bin
 else
-    ln -s $dir/linux_bin $HOME/usr
+    ln -s $dir/linux_bin $HOME/usr/bin
 fi
 
 # vim files
