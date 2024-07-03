@@ -31,8 +31,8 @@ alias gco="git checkout"
 alias gst="git status -uno"
 alias gstn="git status -unormal"
 alias gsta="git status -uall"
-alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat'
-alias glg5='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat -n 5'
+alias glg='git log --pretty=format:"%C(red)%H%C(yellow)%d%n%C(blue)%an %Cgreen%cD, %cr%n%C(bold)%s%n%b" --graph'
+alias glg5='git log --pretty=format:"%C(red)%H%C(yellow)%d%n%C(blue)%an %Cgreen%cD, %cr%n%C(bold)%s%n%b" --graph -n 5'
 alias glgo='git log --pretty=format:"%C(red)%h%Creset [%Cblue%an%Creset]%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative'
 alias glgo5='git log --pretty=format:"%C(red)%h%Creset [%Cblue%an%Creset]%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative -n 5'
 alias glgs='git log --pretty=short --graph'
@@ -53,7 +53,7 @@ alias gcmt='git commit'
 alias gcmt!='git commit --amend'
 alias gcmtm='git commit -m'
 alias gmg='git merge'
-alias grb='git rebase'
+alias grb='git rebase -i'
 alias gtg='git tag --format="%(align:26,left) %(color:bold red) %(refname:strip=2)%(end) %(color:yellow)--> %(color:reset)%(subject)"'
 # tmux
 alias tmux="tmux -S /tmp/tmux-hanjinchen -2" # make tmux support 256-color
