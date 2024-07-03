@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=$(dirname $0)
+dir=$(cd $(dirname $BASH_SOURCE[0]) && pwd)
 
 # Copy conf files
 cp $dir/bash/bash_profile $HOME/.bash_profile
@@ -10,7 +10,7 @@ cp $dir/tmux/tmux.conf $HOME/.tmux.conf
 
 # Binaries
 mkdir -p $HOME/usr
-cp -r $dir/bin $home/usr/
+cp -r $dir/bin $HOME/usr/
 
 # vim files
 mkdir -p $HOME/.vim

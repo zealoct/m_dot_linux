@@ -17,6 +17,7 @@ alias lla='ls -la'
 alias svi='sudo vi'
 alias scat='sudo cat'
 alias sfind='sudo find'
+alias gstt="git status"
 alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
 alias glogo='git log --pretty=oneline'
 alias glogs='git log --pretty=short'
