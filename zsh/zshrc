@@ -19,39 +19,12 @@ promptinit
 #zsh-mime-setup
 colors
 
-alias ls='ls --color=auto'
-alias la="ls -a"
-alias ll="ls -l"
-alias lla="ls -al"
-alias du="du -mh --max-depth=1"
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias rm='rm -i'
-# alias sc='screen '
-# alias sr='screen '
-alias man='LANG=C man'
-#alias gvi='gvim -font "Courier 10 Pitch 14"'
 export BREAK_CHARS="\"#'(),;\|!?[]{}"
-alias sbcl="rlwrap -b \$BREAK_CHARS sbcl"
 
-alias vi="vim"
-alias svi="sudo vi"
-alias scat="sudo cat"
-#alias find="sudo find"
 alias paci="sudo pacman -Sy"
 alias pacs="pacman -Ss"
-alias sudo="sudo "
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
-# git log
-alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
-alias glogo='git log --pretty=format:"%C(yellow)%h %Cblue%cn %Cred%s"'
-alias glogs='git log --pretty=short'
-alias gstt="git status"
-# tmux
-alias tmux="tmux -2" # make tmux support 256-color
-alias ta="tmux attach -d -t"
-alias tls="tmux list-sessions"
 
 export EDITOR=vim
 
