@@ -30,6 +30,9 @@ map fj :b#<CR>
 map fn :bn<CR>
 map fp :bp<CR>
 
+" Can only use mouse in normal mode, so the cursor will not be accidently
+" moved when inserting
+set mouse=n
 
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -61,6 +64,9 @@ let Tlist_Close_On_Select = 1
 let Tlist_Show_One_File = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Auto_Zoom_After_Open = 1
+let Tlist_Process_File_Always = 1
+" Auto update taglist when saving files
+autocmd BufWritePost silent! TlistUpdate
 
 " Highlight whitespace at the end of the line
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -70,6 +76,9 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 " Remove trailing white spaces at save
 autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * silent! %s/\s\+$//
+
+" Highlight the 100th column
+set cc=100
 
 " -----------------
 " status
@@ -104,4 +113,21 @@ let g:indentLine_enabled = 1
 let g:indentLine_char = '.'
 let g:indentLine_setColors = 1
 let g:indentLine_color_term = 125
-set cc=100
+
+" Update Ctags and Taglist
+function! UpdateCtags()
+    let curdir=getcwd()
+    while !filereadable("./tags")
+        cd ..
+        if getcwd() == "/"
+            break
+        endif
+    endwhile
+    if filewritable("./tags")
+        "!ctags -R --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q .
+        !ctags -R .
+    endif
+    execute ":cd " . curdir
+    TlistUpdate
+endfunction
+command Up call UpdateCtags()
