@@ -32,6 +32,7 @@ alias gstta="git status -uall"
 alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
 alias glogo='git log --pretty=oneline'
 alias glogs='git log --pretty=short'
+alias gdiff='git diff'
 # tmux
 alias tmux="tmux -2" # make tmux support 256-color
 alias ta='tmux attach -d -t'
