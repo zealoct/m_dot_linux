@@ -5,7 +5,7 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-map ff :buffer<Space>
+map ff :buffers<CR>:buffer<Space>
 map fj :b#<CR>
 map fn :bn<CR>
 map fp :bp<CR>
@@ -204,6 +204,7 @@ endif
 " Desc: Vim UI
 " ------------------------------------------------------------------ 
 
+set wildmode=list:longest,full
 set wildmenu " turn on wild menu, try typing :h and press <Tab> 
 set showcmd	" display incomplete commands
 set cmdheight=1 " 1 screen lines to use for the command-line 
