@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/audio/zhangbinbin/train_ctc_phone'
+let g:netrw_dirhist_2='/home/audio/hanjinchen/kaldi/egs/yesno/s5/local'
+let g:netrw_dirhist_3='/home/audio/hanjinchen/kaldi-git/egs/ivec_plda_nnet2/phone_DNN2/exp/phone_DNN_mfcc60_cmn'
+let g:netrw_dirhist_4='/home/audio/hanjinchen/kaldi-git/egs/ivec_plda_nnet2/phone_DNN2/exp/phone_DNN_mfcc60_cmn/egs'
+let g:netrw_dirhist_5='/home/audio/hanjinchen/kaldi-git/egs/ivec_plda_nnet2/phone_DNN2/data/train_avad/android'
+let g:netrw_dirhist_6='/home/audio/hanjinchen/kaldi-git/egs/ivec_plda_nnet2/phone_DNN2/data/train_avad/android/duplp39'
+let g:netrw_dirhist_7='/home/audio/hanjinchen/kaldi-git/src/.git'
+let g:netrw_dirhist_8='/home/users/hanjinchen/work/lstm/fwd_score'
+let g:netrw_dirhist_9='/home/users/hanjinchen/vim.mtx/ftdetect'

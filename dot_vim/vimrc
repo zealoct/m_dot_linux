@@ -1,0 +1,107 @@
+set fileencodings=utf-8,gbk "ucs-bom
+set enc=utf-8
+
+set bs=indent,eol,start " all backspacing over everthing in insert mode
+set ruler " show the cursor position all the time
+set nu " show line number
+set ts=4 " tabwidth is 4
+set sw=4
+set expandtab " expand tab to space
+set autoindent
+
+set incsearch " incremental search
+set ignorecase " enable ignore case in search
+set smartcase " use smart case to control when to ignore case
+
+set wildmode=list:longest,full " my favor menu/list style
+set wildmenu                   " my favor menu/list style
+set hid
+set laststatus=2
+
+if &t_Co > 2 || has("gui_running")
+    syntax enable " enable syntax highlighting
+    set hlsearch
+endif
+
+filetype plugin indent on
+
+map ff :buffers<CR>:buffer<Space>
+map fj :b#<CR>
+map fn :bn<CR>
+map fp :bp<CR>
+
+
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+""" Cscope """
+if has("cscope") && filereadable("/usr/bin/cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set csverb
+end
+
+""" Tag List """
+map fl :TlistToggle<CR>
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 50
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Show_One_File = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Auto_Zoom_After_Open = 1
+
+" Highlight whitespace at the end of the line
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" Remove trailing white spaces at save
+autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * silent! %s/\s\+$//
+
+" -----------------
+" status
+" -----------------
+let g:statusline_fugitive = 1
+let g:statusline_rvm=0
+let g:statusline_syntastic=0
+let g:statusline_enabled=1
+let g:statusline_fullpath=0
+
+" Everything must be after Right Separator for BufStat
+let g:statusline_order=[
+      \ 'Filename',
+      \ 'Encoding',
+      \ 'Help',
+      \ 'Filetype',
+      \ 'Modified',
+      \ 'Fugitive',
+      \ 'RVM',
+      \ 'TabWarning',
+      \ 'Syntastic',
+      \ 'Paste',
+      \ 'ReadOnly',
+      \ 'RightSeperator',
+      \ 'CurrentHighlight',
+      \ 'CursorColumn',
+      \ 'LineAndTotal',
+      \ 'FilePercent']
+
+""" indent guide """
+let g:indentLine_enabled = 1
+let g:indentLine_char = '.'
+let g:indentLine_setColors = 1
+let g:indentLine_color_term = 125
+set cc=100
