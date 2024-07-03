@@ -2,7 +2,7 @@
 	name = hanjinchen
 	email = hanjinchen@baidu.com
 [core]
-        editor = vim
+        editor = emacs
 [color]
         status = auto
         branch = auto
