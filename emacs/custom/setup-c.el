@@ -42,7 +42,7 @@
                                               c-lineup-math))
               (c-set-offset 'substatement-open 0)
               (c-set-offset 'brace-list-intro '+)
-              (setq whitespace-line-column 100)
+              (setq whitespace-line-column 120)
               (whitespace-mode t)
               )
             )

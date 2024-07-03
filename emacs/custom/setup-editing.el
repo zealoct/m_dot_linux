@@ -19,6 +19,11 @@
 (delete-selection-mode)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
+(global-set-key (kbd "C-M-n") 'scroll-up-line)
+(global-set-key (kbd "C-M-p") 'scroll-down-line)
+(global-set-key (kbd "C-M-n") 'scroll-up-line)
+(global-set-key (kbd "C-M-p") 'scroll-down-line)
+
 ;; GROUP: Editing -> Killing
 (setq kill-ring-max 5000 ; increase kill-ring capacity
       kill-whole-line t  ; if NIL, kill whole line and move the next line up

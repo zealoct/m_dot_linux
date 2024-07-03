@@ -33,6 +33,8 @@
 
 (require 'tablegen-mode)
 
+(use-package cmake-mode :ensure t)
+
 (use-package yafolding :ensure t
   :config
   (add-hook 'c-mode-hook 'yafolding-mode)
