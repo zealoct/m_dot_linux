@@ -39,7 +39,12 @@
 (global-set-key (kbd "<C-down>") 'enlarge-window)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<M-.>") 'previous-buffer)
+
+(defun switch-to-previous-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+(global-unset-key (kbd "<C-M-l>"))
+(global-set-key (kbd "<C-M-l>") 'switch-to-previous-buffer)
 
 ;; setup GDB
 (setq

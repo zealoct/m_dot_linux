@@ -18,11 +18,19 @@
 (require 'setup-helm)
 (require 'setup-helm-gtags)
 
-(require 'sr-speedbar)
-(setq speedbar-use-images nil)
-(sr-speedbar-refresh-turn-off)
+;;(require 'sr-speedbar)
+;;(setq speedbar-use-images nil)
+;;(sr-speedbar-refresh-turn-off)
 
 (require 'tablegen-mode)
+
+(use-package yafolding
+  :config
+  (add-hook 'c-mode-hook 'yafolding-mode)
+  (add-hook 'c++-mode-hook 'yafolding-mode)
+  (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
+  (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
+  (define-key yafolding-mode-map (kbd "<C-return>") nil))
 
 ;; backspace key
 ;; (global-set-key (kbd "C-?") 'help-command)
@@ -32,14 +40,6 @@
 
 ;; load customized theme
 (load-theme 'zea t)
-
-(use-package yafolding
-  :config
-  (add-hook 'c-mode-hook 'yafolding-mode)
-  (add-hook 'c++-mode-hook 'yafolding-mode)
-  (define-key yafolding-mode-map (kbd "<C-S-return>") nil)
-  (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
-  (define-key yafolding-mode-map (kbd "<C-return>") nil))
 
 ;; element-args
 ;; (require 'function-args)
