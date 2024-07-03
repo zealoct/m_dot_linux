@@ -3,6 +3,7 @@
 #
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
+[[ -s "$HOME/.jumbo/etc/bashrc" ]] && source "$HOME/.jumbo/etc/bashrc"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -35,3 +36,10 @@ alias glogs='git log --pretty=short'
 alias tmux="tmux -2" # make tmux support 256-color
 alias ta='tmux attach -d -t'
 alias tls='tmux ls'
+# PATH setup
+PATH=$HOME/.jumbo/bin:$PATH
+PATH=$HOME/usr/bin:$PATH
+PATH=$HOME/usr/bin/ccover/bin:$PATH
+export PATH
+
+export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
