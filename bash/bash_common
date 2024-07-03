@@ -55,8 +55,12 @@ alias ta='tmux attach -d -t'
 alias tls='tmux ls'
 
 # PATH setup
-PATH=$HOME/usr/bin/gcc:$PATH
+PATH=/sbin:/bin:$PATH
 PATH=$HOME/usr/bin:$PATH
+PATH=$HOME/usr/bin/gcc:$PATH
+PATH=$HOME/usr/bin/ccover/bin:$PATH
+PATH=$HOME/.BCloud/bin:$PATH
+PATH=$HOME/scmtool/usr/bin:$PATH
 export PATH
 
-export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/lib:$HOME/.jumbo/lib:$LD_LIBRARY_PATH

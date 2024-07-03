@@ -17,3 +17,6 @@ case $TERM in
         export PS1="\e[1;35m\A\e[0m \u@\h \w\n$ "
     ;;
 esac
+
+[[ -s "/home/hanjinchen/.jumbo/etc/bashrc" ]] && source "/home/hanjinchen/.jumbo/etc/bashrc"
+[[ -s "/home/disk6/hanjinchen/.jumbo/etc/bashrc" ]] && source "/home/disk6/hanjinchen/.jumbo/etc/bashrc"
