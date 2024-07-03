@@ -92,18 +92,20 @@ let Tlist_Process_File_Always = 1
 " Auto update taglist when saving files
 autocmd BufWritePost silent! TlistUpdate
 
-" Highlight whitespace at the end of the line
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" Highlight improper whitespace
+" 1. tab
+" 2. trailing white space
+highlight ImproperWhitespace ctermbg=red guibg=red
+match ImproperWhitespace /\t\|\s\+$/
+autocmd BufWinEnter * match ImproperWhitespace /\t\|\s\+$/
+autocmd InsertEnter * match ImproperWhitespace /\t\|\s\+\%#\@<!$/
+autocmd InsertLeave * match ImproperWhitespace /\t\|\s\+$/
 " Remove trailing white spaces at save
 "autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * silent! %s/\s\+$//
 command Trim silent! %s/\s\+$//
 
 " Highlight the 100th column
-set cc=100
+set cc=101
 
 " -----------------
 " status

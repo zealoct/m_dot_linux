@@ -24,5 +24,5 @@ function StripTrailingWhite()
     call winrestview(l:winview)
 endfunction
 
-autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call StripTrailingWhite()
-autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call RetabIndents()
+" autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call StripTrailingWhite()
+" autocmd BufWritePre,FileAppendPre,FileWritePre,FilterWritePre * :call RetabIndents()
