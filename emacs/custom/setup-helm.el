@@ -149,6 +149,7 @@
 
     (use-package helm-ag
       :init
+      (setq helm-ag-insert-at-point 'symbol)
       :bind ("C-c h g" . helm-projectile-ag)
       )
     )
