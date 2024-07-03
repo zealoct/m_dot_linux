@@ -76,3 +76,4 @@ export PATH
 export LD_LIBRARY_PATH=$HOME/usr/lib:$HOME/.jumbo/lib:$LD_LIBRARY_PATH
 
 unset LS_COLORS
+unset TMOUT
