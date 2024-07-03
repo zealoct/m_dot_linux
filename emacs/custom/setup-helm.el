@@ -1,7 +1,7 @@
 (use-package helm :ensure t
   :init
   (progn
-    (require 'helm-config)
+    ;;(require 'helm-config)
     (require 'helm-grep)
     (require 'helm-lib)
     ;; To fix error at compile:
@@ -110,6 +110,7 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; Locate the helm-swoop folder to your path
     (use-package helm-swoop
+      :ensure t
       :bind (("C-c h s" . helm-swoop)
              ("C-c h o" . helm-multi-swoop-all))
       :config

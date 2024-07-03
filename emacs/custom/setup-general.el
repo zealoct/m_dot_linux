@@ -127,4 +127,14 @@
   (global-set-key (kbd "C-c C-m") 'jpt-toggle-mark-word-at-point)
   )
 
+(use-package auto-highlight-symbol :ensure t
+  :init
+  (global-auto-highlight-symbol-mode)
+  :bind (:map auto-highlight-symbol-mode-map
+              ("M-p" . ahs-backward)
+              ("M-n" . ahs-forward))
+  :config
+  (setq ahs-idle-interval 1.0)
+  )
+
 (provide 'setup-general)

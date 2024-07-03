@@ -47,6 +47,7 @@
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
 (use-package volatile-highlights
+  :ensure t
   :init
   (volatile-highlights-mode t))
 
@@ -61,17 +62,20 @@
 ;; GROUP: Editing -> Yasnippet
 ;; Package: yasnippet
 (use-package yasnippet
+  :ensure t
   :defer t
   :init
   (add-hook 'prog-mode-hook 'yas-minor-mode))
 
 ;; Package: clean-aindent-mode
 (use-package clean-aindent-mode
+  :ensure t
   :init
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
 ;; Package: dtrt-indent
 (use-package dtrt-indent
+  :ensure t
   :init
   (setq dtrt-indent-verbosity 0)
   :config
@@ -79,6 +83,7 @@
 
 ;; Package: ws-butler
 (use-package ws-butler
+  :ensure t
   :init
   (add-hook 'prog-mode-hook 'ws-butler-mode)
   (add-hook 'text-mode 'ws-butler-mode)
@@ -90,6 +95,7 @@
 ;; PACKAGE: anzu
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
 (use-package anzu
+  :ensure t
   :init
   (global-anzu-mode)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
@@ -98,6 +104,7 @@
 
 ;; PACKAGE: iedit
 (use-package iedit
+  :ensure t
   :bind (("C-;" . iedit-mode))
   :init
   (setq iedit-toggle-key-default nil))
