@@ -1,0 +1,1 @@
+wget -r -nH --level=0 --cut-dirs=8 getprod@product.scm.baidu.com:/data/prod-64/inf/da/ecom-dnn/tools/tools_1-0-21-1015_PD_BL/output/fpga-tools.tar.gz --user getprod --password getprod

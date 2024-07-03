@@ -1,0 +1,1 @@
+mv output/fpga-tools.tar.gz /home/work/ && cd /home/work && tar -zxf fpga-tools.tar.gz  && cd fpga-dsp-tools   && sh install_newcard.sh  && ./bin/get_version

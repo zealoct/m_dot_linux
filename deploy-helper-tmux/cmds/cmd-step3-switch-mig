@@ -1,0 +1,1 @@
+cd /home/work/fpga-dsp-tools  &&  sed  -i 's/2-2-0-2/2-2-0-1/g'  COMMON_CONFIG && sh install_newcard.sh && ./bin/get_version

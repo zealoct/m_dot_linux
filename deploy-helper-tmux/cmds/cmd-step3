@@ -1,0 +1,1 @@
+sh start_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && sh test_fpga.sh && ll /dev/fpga0
