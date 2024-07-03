@@ -40,6 +40,7 @@
               (c-set-offset 'statement-cont '(c-lineup-string-cont
                                               c-lineup-cascaded-calls
                                               c-lineup-math))
+              (c-set-offset 'substatement-open 0)
               (c-set-offset 'brace-list-intro '+)
               (setq whitespace-line-column 100)
               (whitespace-mode t)

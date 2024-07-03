@@ -25,6 +25,7 @@
         dtrt-indent
         ;;ecb
         helm
+        helm-ag
         helm-ls-git
         helm-gtags
         helm-projectile
@@ -37,7 +38,7 @@
         ;;rainbow-delimiters
         ;;smart-tabs-mode
         swiper-helm
-        undo-tree
+        ;;undo-tree
         use-package
         volatile-highlights
         ws-butler
