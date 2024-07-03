@@ -57,6 +57,7 @@
 
 ;; company
 (use-package company
+  :ensure t
   :init
   (global-company-mode 1)
   (setq company-dabbrev-downcase 0)
@@ -68,17 +69,22 @@
           (company-capf company-abbrev company-dabbrev)
           )))
 
+(use-package company-c-headers :ensure t)
+;;(use-package company-clang :ensure t)
+
 ;; (define-key c-mode-map  [(control tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(control tab)] 'company-complete)
 
 ;; Package: projejctile
 (use-package projectile
+  :ensure t
   :init
   (projectile-global-mode)
   (setq projectile-enable-caching t))
 
 ;; Package zygospore
 (use-package zygospore
+  :ensure t
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
 
@@ -91,7 +97,7 @@
 ;; whitespace
 (require 'whitespace)
 (setq whitespace-style '(face empty tabs lines-tail trailing))
-;;(setq whitespace-line-column 100)
+(setq whitespace-line-column 100)
 ;;(global-whitespace-mode nil)
 
 ;; automatically show paren

@@ -6,8 +6,9 @@
 
 ;; set up ELPA and MELPA repositories
 (require 'package)
-(setq package-archives '(("gnu-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-			 ("melpa-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+(setq package-archives
+      '(("gnu-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+		("melpa-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (package-initialize)
 
@@ -17,8 +18,8 @@
         anzu
         auto-complete
         clean-aindent-mode
-        company
-        company-c-headers
+        ;;company
+        ;;company-c-headers
         company-clang
         counsel-gtags
         counsel-projectile
@@ -45,7 +46,7 @@
         ;;xcscope
         yafolding
         yasnippet
-        zygospore
+        ;;zygospore
         ))
 
 ;; zygospore helm-gtags helm yasnippet ws-butler volatile-highlights

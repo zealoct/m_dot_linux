@@ -74,7 +74,9 @@
   :init
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   ;;(setq counsel-projectile-key-bindings "C-c p")
-  :bind  (("C-x C-b" . counsel-projectile))
+  :bind  (("C-x C-b" . counsel-projectile)
+          ("C-x c p" . counsel-projectile-ag)
+          )
   :config
   (counsel-projectile-mode)
   )
