@@ -2,23 +2,32 @@
 # ~/.bashrc
 #
 
+[[ -f /etc/bashrc ]] && source /etc/bashrc
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
 alias svi='sudo vi'
 alias scat='sudo cat'
-alias find='sudo find'
+alias sfind='sudo find'
 alias apti="sudo aptitude install"
 alias apts="aptitude search"
 alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
 alias glogo='git log --pretty=oneline'
 alias glogs='git log --pretty=short'
 alias ta='tmux attach -d -t'
+alias tls='tmux ls'
 
-PATH=$PATH:~/bin/
-
+PATH=$PATH:~/.usr/bin/
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATh
+
+LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
 
 #PATH=$PATH:/opt/jdk1.6.0_31/bin/
 
