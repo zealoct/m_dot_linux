@@ -27,8 +27,8 @@ alias gstn="git status -unormal"
 alias gsta="git status -uall"
 alias glg='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat'
 alias glg5='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)%n%cD, %cr" --stat -n 5'
-alias glgo='git log --pretty=format:"%h --- %s --- %aN" --graph'
-alias glgo5='git log --pretty=format:"%h --- %s --- %aN" --graph -n5'
+alias glgo='git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative'
+alias glgo5='git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset" --graph --date=relative -n 5'
 alias glgs='git log --pretty=short --graph'
 alias glgs5='git log --pretty=short --graph -n 5'
 alias glgm='git log --pretty=medium --graph'
