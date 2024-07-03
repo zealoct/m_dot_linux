@@ -40,10 +40,10 @@ case $TERM in
         function sctitle() { print -Pn "\ek$1\e\\"}
         function precmd() { sctitle "%20<..<%~%<<" }
         function preexec() { sctitle "%20>..>$1%<<" }
-        export PROMPT=$'%{$bg[white]%} %D{%H:%M} %{$reset_color%} %~ %{$reset_color%}$(git_super_status)\n%{$fg[blue]%}%#%{$reset_color%} '
+        export PROMPT=$'%{\e[1;35m%}%D{%H:%M}%{\e[0m%} %~ $(git_super_status)\n%{\e[1;35m%}%#%{\e[0m%} '
     ;;
     *)
-        export PROMPT=$'%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%~]%{$reset_color%}$(git_super_status)\n%{$fg[cyan]%}%#%{$reset_color%} '
+        export PROMPT=$'%{\e[1;35m%}%D{%H:%M}%{\e[0m%} %n@%m %~ $(git_super_status)\n%{\e[1;35m%}%#%{\e[0m%} '
     ;;
 esac
 

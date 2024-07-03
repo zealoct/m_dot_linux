@@ -60,6 +60,3 @@ PATH=$HOME/usr/bin:$PATH
 export PATH
 
 export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
-
-export https_proxy="https://yf-inf-fpga-spark00.yf01.baidu.com:8123"
-export http_proxy="http://yf-inf-fpga-spark00.yf01.baidu.com:8123"
