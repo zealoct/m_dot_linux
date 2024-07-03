@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/zealoct/workspace/ics-ss11/lab1'
+let g:netrw_dirhist_2='/home/zealoct/froyo/bionic'
+let g:netrw_dirhist_3='/home/zealoct/.zsh'
+let g:netrw_dirhist_4='/home/zealoct/workspace/test/temp'
+let g:netrw_dirhist_5='/home/zealoct/.zsh'
+let g:netrw_dirhist_6='/home/zealoct/workspace/ics-ss11/final'
+let g:netrw_dirhist_7='/home/zealoct/.zsh'
+let g:netrw_dirhist_8='/home/zealoct/tctest/str.sh'
+let g:netrw_dirhist_9='/home/zealoct/.oh-my-zsh/themes'

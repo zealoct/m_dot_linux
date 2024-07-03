@@ -1,0 +1,30 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias svi='sudo vi'
+alias scat='sudo cat'
+alias find='sudo find'
+alias apti="sudo aptitude install"
+alias apts="aptitude search"
+alias glog='git log --pretty=format:"%C(yellow)%H %C(blue)%an%C(red) %s %C(reset)" --stat'
+alias glogo='git log --pretty=oneline'
+alias glogs='git log --pretty=short'
+alias ta='tmux attach -d -t'
+
+PATH=$PATH:~/bin/
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+#PATH=$PATH:/opt/jdk1.6.0_31/bin/
+
+#export JAVA_HOME=/opt/jdk1.6.0_31
+#export JRE_HOME=$JAVA_HOME/jre
+#export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+#export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/bin/tools.jar:$JRE_HOME/bin
+#export ANDROID_JAVA_HOME=$JAVA_HOME
+
