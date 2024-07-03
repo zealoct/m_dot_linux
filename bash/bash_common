@@ -48,6 +48,7 @@ PATH=$HOME/.BCloud/bin:$PATH
 PATH=$HOME/scmtool/usr/bin:$PATH
 PATH=$HOME/.jumbo/bin:$PATH
 PATH=$HOME/usr/bin:$PATH
+PATH=$HOME/usr/bin/gcc:$PATH
 PATH=$HOME/usr/bin/ccover/bin:$PATH
 export PATH
 
