@@ -34,6 +34,12 @@
 ;; show column number by default
 (setq column-number-mode t)
 
+;; shortcuts for fast window shrinking
+(global-set-key (kbd "<C-up>") 'shrink-window)
+(global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+
 ;; setup GDB
 (setq
  ;; use gdb-many-windows by default
