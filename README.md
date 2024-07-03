@@ -116,3 +116,5 @@ alias grb='git rebase'
     switch to it first!
 
 -   some installation scripts in `intstalls` folder
+
+![test png](test.png)
