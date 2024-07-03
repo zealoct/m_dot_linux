@@ -9,6 +9,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
+(when (eq system-type 'darwin)
+  (setq mac-right-command-modifier 'meta))
+
 (require 'setup-general)
 (require 'setup-cedet)
 (require 'setup-editing)
@@ -46,21 +49,21 @@
 ;; (fa-config-default)
 ;; (define-key c-mode-map  [(tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(tab)] 'company-complete)
-(custom-set-variables
+;;(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("ba97e528aa6525b5fb4d9aca64c72eaad024fcc587619e0778bcce3530420de6" default)))
- '(package-selected-packages
-   (quote
-    (helm-ag zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; '(custom-safe-themes
+;;   (quote
+;;    ("ba97e528aa6525b5fb4d9aca64c72eaad024fcc587619e0778bcce3530420de6" default)))
+;; '(package-selected-packages
+;;   (quote
+;;    (helm-ag zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
+;;(custom-set-faces
+;; ;; custom-set-faces was added by Custom.
+;; ;; If you edit it by hand, you could mess it up, so be careful.
+;; ;; Your init file should contain only one such instance.
+;; ;; If there is more than one, they won't work right.
+;; )
 (put 'downcase-region 'disabled nil)
