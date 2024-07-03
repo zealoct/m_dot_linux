@@ -6,4 +6,4 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
-# config in bash_common and bashrc instead of here
+# config in bash_common and bashrc instead of heresource "$HOME/.cargo/env"

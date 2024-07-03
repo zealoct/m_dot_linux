@@ -3,8 +3,14 @@ export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
 # general alias
+if [ "$(uname)" == "Darwin" ]; then
+alias l='ls -G'
+alias ls='ls -G'
+else
 alias l='ls --color=auto'
 alias ls='ls --color=auto'
+fi
+
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'

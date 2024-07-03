@@ -3,7 +3,8 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;; (package-initialize)
+
+;;(package-initialize)
 
 (load "~/.emacs.d/init-packages")
 
@@ -15,9 +16,13 @@
 (require 'setup-c)
 (require 'setup-rust)
 (require 'protobuf-mode)
-;;(require 'setup-ivy-counsel)
-(require 'setup-helm)
-(require 'setup-helm-gtags)
+
+(if (eq system-type 'darwin)
+    ((require 'setup-ivy-counsel)))
+
+(if (eq system-type 'gnu/linux)
+    ((require 'setup-helm)
+     (require 'setup-helm-gtags)))
 
 ;;(require 'sr-speedbar)
 ;;(setq speedbar-use-images nil)
@@ -33,6 +38,12 @@
   (define-key yafolding-mode-map (kbd "<C-M-return>") nil)
   (define-key yafolding-mode-map (kbd "<C-return>") nil))
 
+(if (eq system-type 'darwin)
+    ((setq mac-option-key-is-meta nil)
+     (setq mac-command-key-is-meta t)
+     (setq mac-command-modifier 'meta)
+     (setq mac-option-modifier nil)))
+
 ;; backspace key
 ;; (global-set-key (kbd "C-?") 'help-command)
 ;; (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -40,15 +51,11 @@
 ;; (global-set-key (kbd "M-s M-f") 'speedbar-get-focus)
 
 ;; load customized theme
-(load-theme 'zea t)
-
-;; element-args
-;; (require 'function-args)
-;; (fa-config-default)
-;; (define-key c-mode-map  [(tab)] 'company-complete)
-;; (define-key c++-mode-map  [(tab)] 'company-complete)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
+(if window-system
+    (load-theme 'light-blue t)
+  (load-theme 'zea t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
@@ -61,9 +68,11 @@
    '(counsel-ag-popup gnu-elpa gnu-elpa-keyring-update helm-ag zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))
  '(semantic-mode t))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
+ '(default ((t (:inherit nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "PragmataPro")))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
-(put 'downcase-region 'disabled nil)
+ '(custom-safe-themes
+   '("1e541b85f32e32f1f5d5c3afaf1ba3d5f3262d140a09d8c1a9099493eef56a8d" default)))
