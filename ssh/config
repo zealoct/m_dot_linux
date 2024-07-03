@@ -27,3 +27,6 @@ Hostname yf-inf-fpga-spark04.yf01
 
 Host dev147
 Hostname cp01-rdqa04-dev147.cp01
+
+Host storage1
+Hostname bb-mco-cloud-storage1.bb01
