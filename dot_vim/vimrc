@@ -96,7 +96,7 @@ autocmd BufWritePost silent! TlistUpdate
 " Highlight improper whitespace
 " 1. tab
 " 2. trailing white space
-highlight ImproperWhitespace ctermbg=red guibg=red
+highlight ImproperWhitespace ctermbg=lightred guibg=lightred
 match ImproperWhitespace /\t\|\s\+$/
 autocmd BufWinEnter * match ImproperWhitespace /\t\|\s\+$/
 autocmd InsertEnter * match ImproperWhitespace /\t\|\s\+\%#\@<!$/
@@ -107,6 +107,7 @@ command Trim silent! %s/\s\+$//
 
 " Highlight the 100th column
 set cc=101
+highlight ColorColumn ctermbg=grey
 
 " -----------------
 " status
