@@ -11,7 +11,7 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (message "c-mode-hooked")
-            (setq tab-width 2)
+            (setq tab-width 4)
             (setq c-basic-offset tab-width)
             (setq indent-tabs-mode nil)
             (c-set-offset 'arglist-intro '++)

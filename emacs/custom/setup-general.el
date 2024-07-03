@@ -70,4 +70,7 @@
 ;; automatically show paren
 (show-paren-mode 1)
 
+;; auto detect file changes on disk
+(global-auto-revert-mode 1)
+
 (provide 'setup-general)
