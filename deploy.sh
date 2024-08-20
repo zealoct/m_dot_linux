@@ -31,7 +31,9 @@ ln -s $HOME/.vim/vimrc $HOME/.vimrc
 ln -s $dir/emacs $HOME/.emacs.d
 
 # ssh host alias
+mkdir -p $HOME/.ssh/
 #cp $dir/ssh/config $HOME/.ssh/
 #chmod 644 $HOME/.ssh/config
+ln -s $dir/ssh/id_rsa $HOME/.ssh/
 
 source ~/.bash_profile
