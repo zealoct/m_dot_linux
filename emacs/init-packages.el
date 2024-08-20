@@ -4,6 +4,8 @@
 
 ;;; set up package repositories from which additional packages can be installed
 
+;;; currently NOT USED!
+
 ;; set up ELPA and MELPA repositories
 (require 'package)
 (setq package-archives

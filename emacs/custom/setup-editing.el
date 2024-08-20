@@ -13,7 +13,7 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(keyboard-translate ?\C-h ?\C-?)
+;;(keyboard-translate ?\C-h ?\C-?)
 
 (setq-default indent-tabs-mode nil)
 (delete-selection-mode)
