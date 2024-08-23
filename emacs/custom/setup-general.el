@@ -134,7 +134,7 @@
               ("M-p" . ahs-backward)
               ("M-n" . ahs-forward))
   :config
-  (setq ahs-idle-interval 1.0)
+  (setq ahs-idle-interval 0.3)
   )
 
 (provide 'setup-general)
