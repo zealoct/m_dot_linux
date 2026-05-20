@@ -56,36 +56,36 @@
  )
 
 ;; company
-(use-package company
-  :ensure t
-  :init
-  (global-company-mode 1)
-  (setq company-dabbrev-downcase 0)
-  (setq company-idle-delay 1.5)
-  (setq company-backends
-        '((company-files          ; files & directory
-           company-keywords       ; keywords
-           company-yasnippet)
-          (company-capf company-abbrev company-dabbrev)
-          )))
-
-(use-package company-c-headers
-  :ensure t)
+;;(use-package company
+;;  :ensure t
+;;  :init
+;;  (global-company-mode 1)
+;;  (setq company-dabbrev-downcase 0)
+;;  (setq company-idle-delay 1.5)
+;;  (setq company-backends
+;;        '((company-files          ; files & directory
+;;           company-keywords       ; keywords
+;;           company-yasnippet)
+;;          (company-capf company-abbrev company-dabbrev)
+;;          )))
+;;
+;;(use-package company-c-headers
+;;  :ensure t)
 ;;(use-package company-clang :ensure t)
 
 ;; (define-key c-mode-map  [(control tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(control tab)] 'company-complete)
 
-(use-package swiper
-  :ensure t)
+;;(use-package swiper
+;;  :ensure t)
 
 ;; Package: projejctile
 (use-package projectile
   :ensure t
+  :init (projectile-mode 1)
+  :bind-keymap ("C-c p" . projectile-command-map)
   :config
-  (projectile-mode)
   (setq projectile-enable-caching t)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 ;; Package zygospore

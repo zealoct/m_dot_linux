@@ -1,5 +1,7 @@
 ;; company-c-headers
-(use-package company-c-headers)
+(use-package company-c-headers
+  :ensure t
+  )
 
 (setq company-backends
       '((company-gtags
@@ -13,6 +15,7 @@
 ;;(company-mode)
 
 (use-package cc-mode
+  :ensure t
   :init
   ;;(define-key c-mode-map  [(tab)] 'company-complete)
   ;;(define-key c++-mode-map  [(tab)] 'company-complete)

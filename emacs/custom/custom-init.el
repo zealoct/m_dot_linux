@@ -1,5 +1,5 @@
 (require 'setup-general)
-(require 'setup-cedet)
+;;(require 'setup-cedet)
 (require 'setup-editing)
 (require 'setup-c)
 (require 'setup-rust)
@@ -7,16 +7,23 @@
 
 (cond
  ((eq system-type 'darwin)
+  ;; Ivy counsel
   ;;(require 'setup-ivy-counsel)
-  (require 'setup-helm)
-  (require 'setup-helm-gtags)
+  ;;
+  ;; Helm
+  ;;(require 'setup-helm)
+  ;;(require 'setup-helm-gtags)
+  ;;
+  ;; Vertico + Consult + Orderless
+  (require 'setup-vertico)
   (setq mac-option-key-is-meta nil)
   (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier nil))
  ((eq system-type 'gnu/linux)
-  (require 'setup-helm)
-  (require 'setup-helm-gtags)))
+  ;;(require 'setup-helm)
+  ;;(require 'setup-helm-gtags)))
+  (require 'setup-vertico)
 
 ;;(require 'sr-speedbar)
 ;;(setq speedbar-use-images nil)
@@ -43,8 +50,8 @@
 ;; (global-set-key (kbd "M-s M-f") 'speedbar-get-focus)
 
 ;; load customized theme
-(if window-system
-    (load-theme 'tsdh-light t)
-  (load-theme 'zea t))
+;;(if window-system
+;;    (load-theme 'tsdh-light t)
+;;  (load-theme 'tsdh-light t))
 
 (provide 'custom-init)
