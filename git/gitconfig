@@ -1,8 +1,8 @@
  [user]
-	name = hanjinchen
+	name = jhan
 	email = zealoct@hotmail.com
 [core]
-        editor = emacs -nw
+        editor = vim
 [color]
         status = auto
         branch = auto
@@ -28,3 +28,5 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[safe]
+	directory = *
