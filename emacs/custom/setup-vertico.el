@@ -13,6 +13,16 @@
   :ensure t
   :init (vertico-mode 1)
   ;;(vertico-indexed-mode 1)
+  :config
+  (use-package vertico-directory
+    :ensure nil ; 内置在 vertico 包中，无需重复下载
+    :bind (:map vertico-map
+                ;; 快速回退一级目录
+                ("C-l" . vertico-directory-up)
+                ("RET" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char))
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+    )
   ) ; Enable the clean vertical completion list
 
 (use-package orderless
@@ -66,6 +76,13 @@
          ("C-c o" . consult-imenu)
          )
   :init
+  :config (setq consult-imenu-config
+                '((?f "Function"   . font-lock-function-name-face)
+                  (?c "Class"      . font-lock-type-face)
+                  (?m "Method"     . font-lock-function-name-face)
+                  (?v "Variable"   . font-lock-variable-name-face)
+                  (?t "Type"       . font-lock-type-face)))
+
   ;; Enable live previewing files/buffers as you scroll through choices
   (setq consult-preview-key 'any))
 
@@ -109,13 +126,49 @@
 ;; 1. The Core LSP Engine (Built-in since Emacs 29)
 (use-package eglot
   :ensure nil ; Built-in
-  :hook ((python-mode . eglot-ensure)
+  :hook ((c-mode . eglot-ensure)
+         (c++-mode . eglot-ensure)
+         (python-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure)
          (go-mode . eglot-ensure)) ; Auto-start for these languages
   :bind (:map eglot-mode-map
               ("M-." . xref-find-definitions)
               ("M-?" . xref-find-references)
-              ("C-c r" . eglot-rename)))    ; VS Code's F2 symbol rename
+              ("C-c r" . eglot-rename))
+  :config
+  (setq eglot-imenu-config
+        '((:Variable nil)      ; 彻底过滤局部变量和全局变量
+          (:Field nil)         ; 过滤结构体/类的成员变量（属性）
+          (:Constant nil)      ; 过滤常量
+          ;; 以下保持默认，允许显示
+          (:Class t)
+          (:Method t)
+          (:Function t)
+          (:Interface t)))
+  )
+
+(with-eval-after-load 'eglot
+  ;; 编写一个深度优先的清洗过滤器，专门用来杀掉嵌套在里面的 Variable
+  (defun my/eglot-imenu-clean-variables (entries)
+    "深度清理 Imenu 树中的 Variable 和 Field（支持嵌套结构）。"
+    (cl-labels ((clean-item (item)
+                  (cond
+                   ;; 1. 如果是标准的 (Name . Marker) 节点，检查名字或上下文
+                   ((atom (cdr item)) t)
+                   ;; 2. 如果是一个包含子分类的 (Category . Sub-items) 节点
+                   (t
+                    (let ((cat (car item)))
+                      ;; 如果分类名字叫 Variable, Field, Constant 或 变量，直接整组干掉
+                      (if (member cat '("Variable" "Field" "Constant" "变量" "属性"))
+                          nil
+                        ;; 否则，递归清理它肚子里的子节点
+                        (setcdr item (cl-delete-if-not #'clean-item (cdr item)))
+                        ;; 如果子节点被清空了，这个分类本身也别留着了
+                        (cdr item)))))))
+      (cl-delete-if-not #'clean-item entries)))
+
+  ;; 利用 Advice 黑魔法，在 Eglot 生成完 Imenu 准备送给 consult 的瞬间拦截并清洗
+  (advice-add 'eglot-imenu :filter-return #'my/eglot-imenu-clean-variables))
 
 ;; 2. Visual Breadcrumbs (Like VS Code's top bar)
 (use-package breadcrumb

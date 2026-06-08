@@ -52,6 +52,10 @@
 
   )
 
+(use-package cuda-mode
+  :ensure t
+  :mode (("\\.cu\\'" . cuda-mode)
+         ("\\.cuh\\'" . cuda-mode)))
 
 ;; Available C style:
 ;; “gnu”: The default style for GNU projects
