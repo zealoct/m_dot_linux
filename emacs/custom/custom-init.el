@@ -36,6 +36,18 @@
 
 (use-package cmake-mode :ensure t)
 
+(use-package markdown-mode
+  :ensure t
+  :mode (("README\\.md\\'" . gfm-mode) ; Github 风格 Markdown
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init
+  ;; 默认使用 Github 风格的混合换行（更符合现代习惯）
+  (setq markdown-fontify-code-blocks-natively t)
+  :config
+  ;; 绑定一些高频快捷键，或者配合你的 Consult
+  )
+
 (use-package yafolding :ensure t
   :config
   (add-hook 'c-mode-hook 'yafolding-mode)
