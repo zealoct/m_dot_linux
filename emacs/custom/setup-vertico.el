@@ -50,13 +50,6 @@
   (marginalia-mode 1)
   ) ; Shows file sizes, docstrings, etc. in the list
 
-;;(use-package projectile
-;;  :ensure t
-;;  :init
-;;  (projectile-mode 1)
-;;  :bind-keymap
-;;  ("C-c p" . projectile-command-map))
-
 ;; ====================================================================
 ;; 2. CONSULT (The Helm-Ag / Core Search Replacements)
 ;; ====================================================================
@@ -89,6 +82,13 @@
 ;; ====================================================================
 ;; 3. PROJECTILE
 ;; ====================================================================
+
+(use-package projectile
+  :ensure t
+  :init (projectile-mode 1)
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  (setq projectile-enable-caching t))
 
 ;; use Vertico/Consult UI
 (use-package consult-projectile
@@ -195,5 +195,28 @@
   (corfu-auto-delay 0.0)          ; 零延迟
   (corfu-auto-prefix 1)           ; 1个字母就提示
   (corfu-quit-no-match 'separator)) ; 配合 orderless 的空格分割魔法
+
+;; ====================================================================
+;; 5. SYMBOL HIGHLIGHTING
+;; ====================================================================
+
+(use-package hi-lock
+  :ensure nil ; built-in
+  :config
+  (defun jpt-toggle-mark-word-at-point ()
+    (interactive)
+    (if hi-lock-interactive-patterns
+        (unhighlight-regexp (car (car hi-lock-interactive-patterns)))
+      (highlight-symbol-at-point)))
+  (global-set-key (kbd "C-c C-m") 'jpt-toggle-mark-word-at-point))
+
+(use-package auto-highlight-symbol
+  :ensure t
+  :init (global-auto-highlight-symbol-mode)
+  :bind (:map auto-highlight-symbol-mode-map
+              ("M-p" . ahs-backward)
+              ("M-n" . ahs-forward))
+  :config
+  (setq ahs-idle-interval 0.3))
 
 (provide 'setup-vertico)

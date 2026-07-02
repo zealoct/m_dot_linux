@@ -1,132 +1,108 @@
-;; GROUP: Editing -> Editing Basics
-(setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
-      mark-ring-max 5000                ; increase kill ring to contains 5000 entries
-      mode-require-final-newline t      ; add a newline to end of file
-      tab-width 4                       ; default to 4 visible spaces to display a tab
-      )
+;; Editing behavior: indentation, kill/yank, whitespace, minor modes
 
-(add-hook 'sh-mode-hook (lambda ()
-                          (setq tab-width 4)))
+;; ---- indentation (single source of truth) ----
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
 
+;; ---- kill/mark ring, newline policy ----
+(setq global-mark-ring-max 5000
+      mark-ring-max        5000
+      kill-ring-max        5000
+      mode-require-final-newline t
+      kill-whole-line      t)
+
+;; ---- coding system ----
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
-(set-language-environment "UTF-8")
+(set-language-environment  "UTF-8")
 (prefer-coding-system 'utf-8)
 
-;;(keyboard-translate ?\C-h ?\C-?)
-
-(setq-default indent-tabs-mode nil)
+;; ---- basic editing behavior ----
 (delete-selection-mode)
-(global-set-key (kbd "RET") 'newline-and-indent)
-
+(global-set-key (kbd "RET")   'newline-and-indent)
 (global-set-key (kbd "C-M-n") 'scroll-up-line)
 (global-set-key (kbd "C-M-p") 'scroll-down-line)
-(global-set-key (kbd "C-M-n") 'scroll-up-line)
-(global-set-key (kbd "C-M-p") 'scroll-down-line)
+(global-set-key (kbd "M-;")   'comment-dwim-2)
 
-;; GROUP: Editing -> Killing
-(setq kill-ring-max 5000 ; increase kill-ring capacity
-      kill-whole-line t  ; if NIL, kill whole line and move the next line up
-      )
+;; imenu function name in mode-line
+(add-hook 'prog-mode-hook #'which-function-mode)
 
-;; show whitespace in diff-mode
-(add-hook 'diff-mode-hook (lambda ()
-                            (setq-local whitespace-style
-                                        '(face
-                                          tabs
-                                          tab-mark
-                                          spaces
-                                          space-mark
-                                          trailing
-                                          indentation::space
-                                          indentation::tab
-                                          newline
-                                          newline-mark))
-                            (whitespace-mode 1)))
+;; show trailing whitespace when programming
+(add-hook 'prog-mode-hook
+          (lambda () (setq show-trailing-whitespace 1)))
 
-;; Package: volatile-highlights
-;; GROUP: Editing -> Volatile Highlights
+;; ---- whitespace visualization ----
+(global-set-key (kbd "C-c w") 'whitespace-mode)
+(use-package whitespace
+  :ensure nil ; built-in
+  :config
+  (setq whitespace-style       '(face empty tabs lines-tail trailing)
+        whitespace-line-column 100))
+
+;; detailed whitespace in diff-mode
+(add-hook 'diff-mode-hook
+          (lambda ()
+            (setq-local whitespace-style
+                        '(face tabs tab-mark spaces space-mark
+                               trailing indentation::space indentation::tab
+                               newline newline-mark))
+            (whitespace-mode 1)))
+
+;; ---- packages ----
+
 (use-package volatile-highlights
   :ensure t
-  :init
-  (volatile-highlights-mode t))
+  :init (volatile-highlights-mode t))
 
-;; Package: undo-tree
-;; GROUP: Editing -> Undo -> Undo Tree
-;;(use-package undo-tree
-;;  :init
-;;  (global-undo-tree-mode 1))
-
-
-;; Package: yasnippet
-;; GROUP: Editing -> Yasnippet
-;; Package: yasnippet
 (use-package yasnippet
   :ensure t
   :defer t
-  :init
-  (add-hook 'prog-mode-hook 'yas-minor-mode))
+  :init (add-hook 'prog-mode-hook 'yas-minor-mode))
 
-;; Package: clean-aindent-mode
 (use-package clean-aindent-mode
   :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'clean-aindent-mode))
+  :init (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
-;; Package: dtrt-indent
 (use-package dtrt-indent
   :ensure t
-  :init
-  (setq dtrt-indent-verbosity 0)
-  :config
-  (dtrt-indent-mode 1))
+  :init (setq dtrt-indent-verbosity 0)
+  :config (dtrt-indent-mode 1))
 
-;; Package: ws-butler
 (use-package ws-butler
   :ensure t
   :init
-  (add-hook 'prog-mode-hook 'ws-butler-mode)
-  (add-hook 'text-mode 'ws-butler-mode)
-  (add-hook 'fundamental-mode 'ws-butler-mode))
+  (add-hook 'prog-mode-hook        'ws-butler-mode)
+  (add-hook 'text-mode-hook        'ws-butler-mode)
+  (add-hook 'fundamental-mode-hook 'ws-butler-mode))
 
-;; PACKAGE: comment-dwim-2
-(global-set-key (kbd "M-;") 'comment-dwim-2)
-
-(add-hook 'prog-mode-hook #'which-function-mode)
-
-;; PACKAGE: iedit
 (use-package iedit
   :ensure t
   :bind (("C-;" . iedit-mode))
-  :init
-  (setq iedit-toggle-key-default nil))
+  :init (setq iedit-toggle-key-default nil))
 
-;; Customized functions
+;; ---- Prelude-derived helpers ----
+
+;; Smart C-a: toggle between first non-whitespace and BOL
 (defun prelude-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 
 Move point to the first non-whitespace character on this line.
 If point is already there, move to the beginning of the line.
 Effectively toggle between the first non-whitespace character and
-the beginning of the line.
-
-If ARG is not nil or 1, move forward ARG - 1 lines first. If
-point reaches the beginning or end of the buffer, stop there."
+the beginning of the line."
   (interactive "^p")
   (setq arg (or arg 1))
-
-  ;; Move lines first
   (when (/= arg 1)
     (let ((line-move-visual nil))
       (forward-line (1- arg))))
-
   (let ((orig-point (point)))
     (back-to-indentation)
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
-
 (global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
 
+;; Copy/cut whole line when no region is active
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
@@ -138,14 +114,13 @@ line instead."
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single
-  line instead."
+line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
-;; kill a line, including whitespace characters until next non-whiepsace character
-;; of next line
+;; kill-line also munches whitespace on next line (C-family + Lisp)
 (defadvice kill-line (before check-position activate)
   (if (member major-mode
               '(emacs-lisp-mode scheme-mode lisp-mode
@@ -156,8 +131,7 @@ line instead."
                  (just-one-space 0)
                  (backward-char 1)))))
 
-;; taken from prelude-editor.el
-;; automatically indenting yanked text if in programming-modes
+;; Auto-indent yanked text in prog-mode
 (defvar yank-indent-modes
   '(LaTeX-mode TeX-mode)
   "Modes in which to indent regions that are yanked (or yank-popped).
@@ -195,13 +169,12 @@ indent yanked text (with prefix arg don't indent)."
     (let ((transient-mark-mode nil))
       (yank-advised-indent-function (region-beginning) (region-end)))))
 
-;; prelude-core.el
+;; Indent buffer or region
 (defun indent-buffer ()
   "Indent the currently visited buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
 
-;; prelude-editing.el
 (defcustom prelude-indent-sensitive-modes
   '(coffee-mode python-mode slim-mode haml-mode yaml-mode)
   "Modes for which auto-indenting is suppressed."
@@ -220,24 +193,9 @@ indent yanked text (with prefix arg don't indent)."
           (indent-buffer)
           (message "Indented buffer.")))
       (whitespace-cleanup))))
-
 (global-set-key (kbd "C-c i") 'indent-region-or-buffer)
 
-;; add duplicate line function from Prelude
-;; taken from prelude-core.el
-(defun prelude-get-positions-of-line-or-region ()
-  "Return positions (beg . end) of the current line
-or region."
-  (let (beg end)
-    (if (and mark-active (> (point) (mark)))
-        (exchange-point-and-mark))
-    (setq beg (line-beginning-position))
-    (if mark-active
-        (exchange-point-and-mark))
-    (setq end (line-end-position))
-    (cons beg end)))
-
-;; smart openline
+;; Smart open-line (M-o)
 (defun prelude-smart-open-line (arg)
   "Insert an empty line after the current line.
 Position the cursor at its beginning, according to the current mode.
@@ -259,6 +217,5 @@ Position the cursor at it's beginning, according to the current mode."
   (indent-according-to-mode))
 
 (global-set-key (kbd "M-o") 'prelude-smart-open-line)
-(global-set-key (kbd "M-o") 'open-line)
 
 (provide 'setup-editing)
