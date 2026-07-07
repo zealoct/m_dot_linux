@@ -1,6 +1,22 @@
-auto-save-list/
+# packages
 elpa/
+package-quickstart.el
+package-quickstart.elc
+
+# state / cache
+auto-save-list/
+.cache/
 semanticdb/
-projectile-bookmarks.eld
-projectile.cache
 recentf
+
+# projectile
+projectile-bookmarks.eld
+projectile-frecency.eld
+projectile.cache
+projects
+
+# magit / transient history
+transient/
+
+# byte-compiled setup files (regenerated locally)
+custom/*.elc

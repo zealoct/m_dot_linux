@@ -39,7 +39,7 @@
   :ensure t
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)))
 
-(global-auto-revert-mode 1)
+(add-hook 'after-init-hook 'global-auto-revert-mode)
 (show-paren-mode 1)
 
 ;; GDB

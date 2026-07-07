@@ -11,8 +11,7 @@
 
 (use-package vertico
   :ensure t
-  :init (vertico-mode 1)
-  ;;(vertico-indexed-mode 1)
+  :hook (after-init . vertico-mode)
   :config
   (use-package vertico-directory
     :ensure nil ; 内置在 vertico 包中，无需重复下载
@@ -27,6 +26,7 @@
 
 (use-package orderless
   :ensure t
+  :after vertico
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
@@ -34,6 +34,7 @@
 
 (use-package marginalia
   :ensure t
+  :after vertico
   :init
   ;; 核心防御：等到 time-date 加载完毕并污染了函数之后，我们立刻出手拦截
   (with-eval-after-load 'time-date
@@ -85,8 +86,8 @@
 
 (use-package projectile
   :ensure t
-  :init (projectile-mode 1)
   :bind-keymap ("C-c p" . projectile-command-map)
+  :hook (after-init . projectile-mode)
   :config
   (setq projectile-enable-caching t))
 
@@ -118,8 +119,8 @@
 ;; It hooks directly into standard Emacs 'xref' keys (M-. to jump, M-, to pop back).
 (use-package citre
   :ensure t
-  :init
-  (require 'citre-config)
+  :defer t
+  :hook (after-init . (lambda () (require 'citre-config)))
   :bind (("M-." . xref-find-definitions)
          ("M-?" . xref-find-references)))
 
@@ -177,6 +178,7 @@
 
 (use-package wgrep
   :ensure t
+  :defer t
   :custom
   (wgrep-auto-save-buffer t))
 ;; 核心工作流提示：
@@ -188,8 +190,7 @@
 ;; 完美替代 Company 的现代代码补全前端
 (use-package corfu
   :ensure t
-  :init
-  (global-corfu-mode 1)
+  :hook (after-init . global-corfu-mode)
   :custom
   (corfu-auto t)                  ; 自动弹出
   (corfu-auto-delay 0.0)          ; 零延迟
@@ -200,23 +201,54 @@
 ;; 5. SYMBOL HIGHLIGHTING
 ;; ====================================================================
 
-(use-package hi-lock
-  :ensure nil ; built-in
-  :config
-  (defun jpt-toggle-mark-word-at-point ()
-    (interactive)
-    (if hi-lock-interactive-patterns
-        (unhighlight-regexp (car (car hi-lock-interactive-patterns)))
-      (highlight-symbol-at-point)))
-  (global-set-key (kbd "C-c C-m") 'jpt-toggle-mark-word-at-point))
+;; C-c C-m 高亮 / 取消高亮当前光标下 symbol; 首次调用自动加载 hi-lock
+(defun jpt-toggle-mark-word-at-point ()
+  (interactive)
+  (require 'hi-lock)
+  (if hi-lock-interactive-patterns
+      (unhighlight-regexp (car (car hi-lock-interactive-patterns)))
+    (highlight-symbol-at-point)))
+(global-set-key (kbd "C-c C-m") 'jpt-toggle-mark-word-at-point)
 
 (use-package auto-highlight-symbol
   :ensure t
-  :init (global-auto-highlight-symbol-mode)
+  :hook (after-init . global-auto-highlight-symbol-mode)
   :bind (:map auto-highlight-symbol-mode-map
               ("M-p" . ahs-backward)
               ("M-n" . ahs-forward))
   :config
   (setq ahs-idle-interval 0.3))
+
+;; ====================================================================
+;; 6. FILE EXPLORER (dired + dired-subtree, lightweight)
+;; ====================================================================
+;; F8 在当前 buffer 打开 dired (定位到当前文件所在目录);
+;; RET 目录/文件都在当前 buffer 打开 (dired-kill-when-opening-new-dired-buffer
+;;   自动关掉旧 dired buffer, 不留一堆);
+;; TAB 就地展开/折叠子目录成缩进树 (dired-subtree);
+;; <backtab> (Shift-TAB) 循环展开/折叠状态;
+;; ^ 上一级; q 退出.
+
+(use-package dired
+  :ensure nil ; built-in
+  :custom
+  (dired-kill-when-opening-new-dired-buffer t) ; Emacs 28+ 内置版 dired-single
+  :hook (dired-mode . dired-hide-details-mode)) ; 隐藏 ls -l 那些细节
+
+(use-package dired-subtree
+  :ensure t
+  :after dired  ; 等 dired load 后
+  :demand t     ; 立即 load 自己 (覆盖 :bind 的隐式 defer), 保证 TAB 绑定即时生效
+  :custom
+  (dired-subtree-use-backgrounds nil) ; 不给每层加深浅不同的背景色 (跟主题冲突时难看)
+  (dired-subtree-line-prefix " │  ")  ; 每层加一条竖线, 辅助分辨嵌套层级
+  :bind (:map dired-mode-map
+              ("TAB"       . dired-subtree-toggle)
+              ("<backtab>" . dired-subtree-cycle)             ; Shift-TAB
+              ("M-d"       . dired-subtree-remove)            ; 从子树内任意位置折叠父目录
+              ("M-n"       . dired-subtree-next-sibling)      ; 下一个兄弟
+              ("M-p"       . dired-subtree-previous-sibling)  ; 上一个兄弟
+              ("M-u"       . dired-subtree-up)                ; 上级目录
+              ))
 
 (provide 'setup-vertico)

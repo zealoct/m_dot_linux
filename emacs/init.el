@@ -10,6 +10,7 @@
 		("melpa-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (setq package-check-signature nil)
+(setq package-quickstart t) ; 把所有 -autoloads.el 合并到 package-quickstart.el 里加速启动
 (package-initialize)
 
 ;; refresh package list if it is not already available
@@ -18,6 +19,9 @@
 ;; other packages are installed by use-package
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
+
+;; startup profiling: 重启后 M-x use-package-report 查看; 用完把这行删掉
+(setq use-package-compute-statistics t)
 
 ;; Load customed init script
 (add-to-list 'load-path "~/.emacs.d/custom")

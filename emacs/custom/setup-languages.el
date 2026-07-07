@@ -4,6 +4,7 @@
 
 (use-package cc-mode
   :ensure nil ; built-in
+  :defer t
   :init
   ;; folding
   (add-hook 'c-mode-common-hook 'hs-minor-mode)
@@ -46,15 +47,22 @@
 
 ;; ---- Rust ----
 
-(use-package rust-mode :ensure t)
+(use-package rust-mode
+  :ensure t
+  :mode ("\\.rs\\'" . rust-mode))
 
 ;; ---- Build systems ----
 
-(use-package cmake-mode :ensure t)
+(use-package cmake-mode
+  :ensure t
+  :mode (("\\`CMakeLists\\.txt\\'" . cmake-mode)
+         ("\\.cmake\\'"            . cmake-mode)))
 
 ;; ---- Data / config formats ----
 
-(use-package json-mode :ensure t)
+(use-package json-mode
+  :ensure t
+  :mode ("\\.json\\'" . json-mode))
 
 ;; ---- Markdown ----
 
@@ -68,7 +76,12 @@
 
 ;; ---- Vendored modes (not on MELPA/ELPA) ----
 
-(require 'protobuf-mode)
-(require 'tablegen-mode)
+(use-package protobuf-mode
+  :ensure nil ; vendored in custom/
+  :mode ("\\.proto\\'" . protobuf-mode))
+
+(use-package tablegen-mode
+  :ensure nil ; vendored in custom/
+  :mode ("\\.td\\'" . tablegen-mode))
 
 (provide 'setup-languages)

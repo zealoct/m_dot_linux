@@ -36,6 +36,7 @@
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 (use-package whitespace
   :ensure nil ; built-in
+  :defer t
   :config
   (setq whitespace-style       '(face empty tabs lines-tail trailing)
         whitespace-line-column 100))
@@ -53,7 +54,7 @@
 
 (use-package volatile-highlights
   :ensure t
-  :init (volatile-highlights-mode t))
+  :hook (after-init . volatile-highlights-mode))
 
 (use-package yasnippet
   :ensure t
@@ -62,19 +63,16 @@
 
 (use-package clean-aindent-mode
   :ensure t
-  :init (add-hook 'prog-mode-hook 'clean-aindent-mode))
+  :hook (prog-mode . clean-aindent-mode))
 
 (use-package dtrt-indent
   :ensure t
   :init (setq dtrt-indent-verbosity 0)
-  :config (dtrt-indent-mode 1))
+  :hook (after-init . dtrt-indent-mode))
 
 (use-package ws-butler
   :ensure t
-  :init
-  (add-hook 'prog-mode-hook        'ws-butler-mode)
-  (add-hook 'text-mode-hook        'ws-butler-mode)
-  (add-hook 'fundamental-mode-hook 'ws-butler-mode))
+  :hook ((prog-mode text-mode fundamental-mode) . ws-butler-mode))
 
 (use-package iedit
   :ensure t
