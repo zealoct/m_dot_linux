@@ -23,6 +23,18 @@
 (global-set-key (kbd "RET")   'newline-and-indent)
 (global-set-key (kbd "C-M-n") 'scroll-up-line)
 (global-set-key (kbd "C-M-p") 'scroll-down-line)
+
+;; half-screen scrolling (C-v scrolls a whole screen)
+(defun my/scroll-down-half-screen ()
+  "Scroll the window down by half its height."
+  (interactive)
+  (scroll-up (/ (window-height) 2)))
+(defun my/scroll-up-half-screen ()
+  "Scroll the window up by half its height."
+  (interactive)
+  (scroll-down (/ (window-height) 2)))
+(global-set-key (kbd "M-N") 'my/scroll-down-half-screen)
+(global-set-key (kbd "M-P") 'my/scroll-up-half-screen)
 (global-set-key (kbd "M-;")   'comment-dwim-2)
 
 ;; imenu function name in mode-line
