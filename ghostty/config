@@ -1,0 +1,6 @@
+theme = iTerm2 Tango Light
+macos-option-as-alt = true
+font-family = "PragmataPro"
+font-size = 14
+keybind = cmd+h=previous_tab
+keybind = cmd+l=next_tab
