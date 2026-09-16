@@ -56,6 +56,10 @@ alias gcmtm='git commit -m'
 alias gmg='git merge'
 alias grb='git rebase -i'
 alias gtg='git tag --format="%(align:26,left) %(color:bold red) %(refname:strip=2)%(end) %(color:yellow)--> %(color:reset)%(subject)"'
+alias gw='git worktree'
+alias gwl='git worktree list'
+alias gwa='git worktree add'
+alias gwr='git worktree remove'
 # tmux
 alias tmux="tmux -S /tmp/tmux-hanjinchen -2" # make tmux support 256-color
 alias ta='tmux attach -d -t'
