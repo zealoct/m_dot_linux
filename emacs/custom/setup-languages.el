@@ -43,7 +43,8 @@
 (use-package cuda-mode
   :ensure t
   :mode (("\\.cu\\'"  . cuda-mode)
-         ("\\.cuh\\'" . cuda-mode)))
+         ("\\.cuh\\'" . cuda-mode)
+         ("\\.hip\\'" . cuda-mode)))
 
 ;; ---- Rust ----
 
