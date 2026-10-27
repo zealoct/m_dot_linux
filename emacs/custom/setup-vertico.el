@@ -129,7 +129,9 @@
   :ensure nil ; Built-in
   :hook ((c-mode . eglot-ensure)
          (c++-mode . eglot-ensure)
+         (cuda-mode . eglot-ensure)
          (python-mode . eglot-ensure)
+         (rust-mode . eglot-ensure)
          (typescript-ts-mode . eglot-ensure)
          (go-mode . eglot-ensure)) ; Auto-start for these languages
   :bind (:map eglot-mode-map
@@ -137,6 +139,8 @@
               ("M-?" . xref-find-references)
               ("C-c r" . eglot-rename))
   :config
+  (add-to-list 'eglot-server-programs
+               '((cuda-mode :language-id "cuda") . ("clangd")))
   (setq eglot-imenu-config
         '((:Variable nil)      ; 彻底过滤局部变量和全局变量
           (:Field nil)         ; 过滤结构体/类的成员变量（属性）
